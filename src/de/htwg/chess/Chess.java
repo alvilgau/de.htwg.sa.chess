@@ -18,7 +18,7 @@ public final class Chess {
 	private static ChessFrame gui;
 	private static IChessController controller;
 	private static Chess instance;
-
+	
 	private Chess() {
 		// Set up logging through log4j
 		PropertyConfigurator.configure("log4j.properties");
