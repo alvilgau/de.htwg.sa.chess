@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.htwg.sa.chess</groupId>
 	<artifactId>de.htwg.sa.chess</artifactId>
-	<version>1.0</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<testSourceDirectory>test</testSourceDirectory>
@@ -68,4 +68,11 @@
 			<version>1.1.1</version>
 		</dependency>
 	</dependencies>
+	<distributionManagement>
+		<snapshotRepository>
+			<id>lenny2</id>
+			<name>lenny2-snapshots</name>
+			<url>http://lenny2.in.htwg-konstanz.de:8081/artifactory/libs-snapshot-local</url>
+		</snapshotRepository>
+	</distributionManagement>
 </project>
