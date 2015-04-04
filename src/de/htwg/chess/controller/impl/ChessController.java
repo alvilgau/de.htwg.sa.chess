@@ -518,6 +518,8 @@ public class ChessController extends Observable implements IChessController {
 		this.statusMessage = "Welcome to Chess";
 		this.turnMessage = "Team white's turn";
 		this.turn = 0;
+		this.turnsWhite = 0;
+		this.turnsBlack = 0;
 		initTeamOne();
 		initTeamTwo();
 		initFieldsRest();
