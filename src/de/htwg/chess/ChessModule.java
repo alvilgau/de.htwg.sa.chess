@@ -7,9 +7,8 @@ import com.google.inject.multibindings.Multibinder;
 import de.htwg.chess.controller.IChessController;
 import de.htwg.chess.model.IFieldFactory;
 import de.htwg.chess.model.IFigureFacotry;
-import de.htwg.chess.plugin.selectedfigure.IDisplaySelectedFigurePlugin;
-import de.htwg.sa.chess.plugins.GraphicalDisplaySelectedFigure;
-import de.htwg.sa.chess.plugins.TextualDisplaySelectedFigure;
+import de.htwg.chess.plugins.SelectedFigureStatus;
+import de.htwg.chess.plugins.StatusPlugin;
 
 public class ChessModule extends AbstractModule {
 
@@ -20,10 +19,9 @@ public class ChessModule extends AbstractModule {
 		bind(IFieldFactory.class).to(de.htwg.chess.model.impl.FieldFactory.class);
 		bind(IFigureFacotry.class).to(de.htwg.chess.model.impl.FigureFactory.class);
 
-		Multibinder<IDisplaySelectedFigurePlugin> plugins = Multibinder.newSetBinder(binder(),
-				IDisplaySelectedFigurePlugin.class);
-		plugins.addBinding().to(GraphicalDisplaySelectedFigure.class);
-		plugins.addBinding().to(TextualDisplaySelectedFigure.class);
+		Multibinder<StatusPlugin> plugins = Multibinder.newSetBinder(binder(), StatusPlugin.class);
+		plugins.addBinding().to(SelectedFigureStatus.class);
+		// TODO: add plugin for showing turn count
 	}
 
 }
