@@ -3,7 +3,9 @@ package de.htwg.chess.view.gui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Set;
 
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -12,6 +14,7 @@ import javax.swing.JMenuItem;
 import com.google.inject.Inject;
 
 import de.htwg.chess.controller.IChessController;
+import de.htwg.chess.plugins.status.StatusPlugin;
 import de.htwg.util.observer.Event;
 import de.htwg.util.observer.IObserver;
 
@@ -31,7 +34,8 @@ public class ChessFrame extends JFrame implements IObserver {
 	 *            - Chess Controller
 	 */
 	@Inject
-	public ChessFrame(final IChessController controller) {
+	public ChessFrame(final IChessController controller, Set<StatusPlugin> plugins) {
+
 		this.controller = controller;
 		controller.addObserver(this);
 
@@ -68,11 +72,39 @@ public class ChessFrame extends JFrame implements IObserver {
 		constructPanels();
 
 		/**
+		 * Add status plugins
+		 */
+		if (plugins.size() > 0) {
+			JMenu pluginMenu = new JMenu("Status Plugins");
+			for (StatusPlugin plugin : plugins) {
+				JCheckBoxMenuItem checkBox = new JCheckBoxMenuItem(plugin.getName());
+				checkBox.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						if (checkBox.isSelected()) {
+							controller.addObserver(plugin);
+							plugin.start(controller);
+							ChessFrame.this.statusPanel.add(plugin.getComponent());
+						} else {
+							controller.removeObserver(plugin);
+							ChessFrame.this.statusPanel.remove(plugin.getComponent());
+							plugin.stop();
+						}
+						ChessFrame.this.statusPanel.revalidate();
+						ChessFrame.this.statusPanel.updateUI();
+					}
+				});
+				pluginMenu.add(checkBox);
+			}
+			menuBar.add(pluginMenu);
+		}
+
+		/**
 		 * Add components to window
 		 */
 		setJMenuBar(menuBar);
-		add(statusPanel, BorderLayout.NORTH);
-		add(gamePanel, BorderLayout.CENTER);
+		add(this.statusPanel, BorderLayout.NORTH);
+		add(this.gamePanel, BorderLayout.CENTER);
 
 		/**
 		 * Window settings
@@ -81,31 +113,32 @@ public class ChessFrame extends JFrame implements IObserver {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
 		setVisible(true);
+
 	}
 
 	/**
 	 * Constructs the Panels
 	 */
 	private void constructPanels() {
-		statusPanel = new StatusPanel();
-		statusPanel.setStatusText(controller.getStatusMessage(),
-				controller.getCheckmateMessage());
-		statusPanel.setTurnText(controller.getTurnMessage());
-		gamePanel = new GamePanel(controller);
-		infoPane = new InfoPane(controller);
+		this.statusPanel = new StatusPanel();
+		this.statusPanel.setStatusText(this.controller.getStatusMessage(),
+				this.controller.getCheckmateMessage());
+		this.statusPanel.setTurnText(this.controller.getTurnMessage());
+		this.gamePanel = new GamePanel(this.controller);
+		this.infoPane = new InfoPane(this.controller);
 	}
 
 	@Override
 	public void update(Event e) {
-		statusPanel.setStatusText(controller.getStatusMessage(),
-				controller.getCheckmateMessage());
-		statusPanel.setTurnText(controller.getTurnMessage());
-		gamePanel.refresh();
+		this.statusPanel.setStatusText(this.controller.getStatusMessage(),
+				this.controller.getCheckmateMessage());
+		this.statusPanel.setTurnText(this.controller.getTurnMessage());
+		this.gamePanel.refresh();
 
-		if (controller.isGameover()) {
-			infoPane.showGameOver(this);
-		} else if (controller.getExchange()) {
-			infoPane.handleExchange(this);
+		if (this.controller.isGameover()) {
+			this.infoPane.showGameOver(this);
+		} else if (this.controller.getExchange()) {
+			this.infoPane.handleExchange(this);
 		}
 	}
 
