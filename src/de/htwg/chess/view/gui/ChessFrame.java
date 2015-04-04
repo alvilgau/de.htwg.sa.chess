@@ -1,12 +1,8 @@
 package de.htwg.chess.view.gui;
 
 import java.awt.BorderLayout;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 import javax.swing.JCheckBoxMenuItem;
@@ -14,12 +10,12 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 
 import com.google.inject.Inject;
 
 import de.htwg.chess.controller.IChessController;
-import de.htwg.chess.plugins.StatusPlugin;import de.htwg.util.observer.Event;
+import de.htwg.chess.plugins.StatusPlugin;
+import de.htwg.util.observer.Event;
 import de.htwg.util.observer.IObserver;
 
 public class ChessFrame extends JFrame implements IObserver {
@@ -31,8 +27,6 @@ public class ChessFrame extends JFrame implements IObserver {
 	private StatusPanel statusPanel;
 	private InfoPane infoPane;
 
-	private List<JPanel> iDisplaySelectedFigurePlugins = new ArrayList<JPanel>();
-
 	/**
 	 * Creates a new GUI
 	 * 
@@ -40,7 +34,8 @@ public class ChessFrame extends JFrame implements IObserver {
 	 *            - Chess Controller
 	 */
 	@Inject
-	public ChessFrame(final IChessController controller, Set<StatusPlugin> plugins) {		this.controller = controller;
+	public ChessFrame(final IChessController controller, Set<StatusPlugin> plugins) {
+		this.controller = controller;
 		controller.addObserver(this);
 
 		JMenuBar menuBar;
@@ -107,12 +102,13 @@ public class ChessFrame extends JFrame implements IObserver {
 		 * Add components to window
 		 */
 		setJMenuBar(menuBar);
-		
+
 		/**
 		 * Add status and plugin panel and the game panel to frame
 		 */
-		add(statusPanel, BorderLayout.NORTH);
-		add(gamePanel, BorderLayout.CENTER);
+		add(this.statusPanel, BorderLayout.NORTH);
+		add(this.gamePanel, BorderLayout.CENTER);
+
 		/**
 		 * Window settings
 		 */
@@ -120,7 +116,6 @@ public class ChessFrame extends JFrame implements IObserver {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
 		setVisible(true);
-
 	}
 
 	/**

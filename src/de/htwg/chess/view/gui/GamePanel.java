@@ -19,7 +19,6 @@ public class GamePanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private static final String COLS = "ABCDEFGH";
 	private static final Color LIGHT = Color.decode("#E5CEA4");
 	private static final Color DARK = Color.decode("#A4785B");
 	private static final Color LIGHT_BLUE = Color.decode("#B8CFE5");
@@ -64,8 +63,7 @@ public class GamePanel extends JPanel {
 		// add column descriptions
 		this.add(new JLabel(""));
 		for (int i = 0; i < this.chessField.length; i++) {
-			this.add(new JLabel(ChessBoardXAxisDescription
-					.getCharCoordinateUpperCaseAsString(i),
+			this.add(new JLabel(ChessBoardXAxisDescription.getCharCoordinateUpperCaseAsString(i),
 					SwingConstants.CENTER));
 		}
 
@@ -74,8 +72,7 @@ public class GamePanel extends JPanel {
 			for (int row = 0; row < this.chessField.length; row++) {
 				switch (row) {
 				case 0:
-					this.add(new JLabel("" + (column + 1),
-							SwingConstants.CENTER));
+					this.add(new JLabel("" + (column + 1), SwingConstants.CENTER));
 				default:
 					this.add(this.chessField[row][column]);
 				}
@@ -101,8 +98,8 @@ public class GamePanel extends JPanel {
 				if (imageName.equals("empty")) {
 					this.chessField[row][column].setIcon(null);
 				} else {
-					this.chessField[row][column].setIcon(new ImageIcon("res/"
-							+ imageName + ".png"));
+					this.chessField[row][column]
+							.setIcon(new ImageIcon("res/" + imageName + ".png"));
 				}
 			}
 		}
@@ -118,8 +115,7 @@ public class GamePanel extends JPanel {
 			int y = this.controller.getSelectedFigure().getyPos();
 			this.chessField[x][y].setBackground(LIGHT_BLUE);
 			for (int[] possMove : this.controller.getPossibleMoves()) {
-				this.chessField[possMove[0]][possMove[1]]
-						.setBackground(LIGHT_BLUE);
+				this.chessField[possMove[0]][possMove[1]].setBackground(LIGHT_BLUE);
 			}
 		}
 	}
