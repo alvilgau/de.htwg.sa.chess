@@ -5,16 +5,15 @@ import org.apache.log4j.Logger;
 import com.google.inject.Inject;
 
 import de.htwg.chess.controller.IChessController;
+import de.htwg.chess.controller.impl.ChessController;
+import de.htwg.chess.model.IField;
+import de.htwg.chess.view.ChessBoardXAxisDescription;
 import de.htwg.util.observer.Event;
 import de.htwg.util.observer.IObserver;
 
 public class TextUI implements IObserver {
 
 	private IChessController controller;
-
-	public enum PositionX {
-		a, b, c, d, e, f, g, h
-	};
 
 	private static final int MAX_LINE_LENGTH = 3;
 
@@ -66,13 +65,13 @@ public class TextUI implements IObserver {
 	 */
 	private boolean inputMovement(String line) {
 		if (line.startsWith("s") && line.length() == MAX_LINE_LENGTH) {
-			PositionX xPos = PositionX.valueOf(String.valueOf(line.charAt(1)));
+			int xPos = ChessBoardXAxisDescription.valueOf(String.valueOf(line.charAt(1))).ordinal();
 			int yPos = Character.getNumericValue(line.charAt(2));
-			controller.select(xPos.ordinal(), --yPos);
+			controller.select(xPos, --yPos);
 		} else if (line.startsWith("m") && line.length() == MAX_LINE_LENGTH) {
-			PositionX xPos = PositionX.valueOf(String.valueOf(line.charAt(1)));
+			int xPos = ChessBoardXAxisDescription.valueOf(String.valueOf(line.charAt(1))).ordinal();
 			int yPos = Character.getNumericValue(line.charAt(2));
-			controller.move(xPos.ordinal(), --yPos);
+			controller.move(xPos, --yPos);
 		}
 
 		return true;
@@ -102,7 +101,7 @@ public class TextUI implements IObserver {
 	 * Prints the TextUI
 	 */
 	public void printTUI() {
-		logger.info(newLine + controller);
+		logger.info(newLine + getGameboardString(controller.getFields()));
 
 		if (controller.getExchange()) {
 			logger.info(newLine + "Pawn reaches end of the playground. "
@@ -123,5 +122,34 @@ public class TextUI implements IObserver {
 					+ " sa1 - selects the figure at position a1,"
 					+ " ma3 - moves the selected figure to a3,");
 		}
+	}
+
+	/**
+	 * Converts passed fields array into a printable textual layout.
+	 * 
+	 * @param IField
+	 *            fields[][]
+	 * @return String with the current gameboard layout as string
+	 */
+	private String getGameboardString(final IField fields[][]) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("\n |");
+		for (ChessBoardXAxisDescription yAxisChar : ChessBoardXAxisDescription
+				.values()) {
+			sb.append("  " + yAxisChar);
+		}
+		sb.append("  |");
+		sb.append("\n-+--------------------------+");
+
+		for (int i = ChessController.SEVEN; i >= ChessController.ZERO; i--) {
+			sb.append("\n" + (i + 1) + "|  ");
+			for (int k = 0; k <= ChessController.SEVEN; k++) {
+				sb.append(fields[k][i] + "  ");
+			}
+			sb.append("|");
+		}
+
+		sb.append("\n-+--------------------------+");
+		return sb.toString();
 	}
 }

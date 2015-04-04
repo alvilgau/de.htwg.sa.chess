@@ -2,7 +2,7 @@ package de.htwg.chess.model.impl;
 
 import de.htwg.chess.model.IField;
 import de.htwg.chess.model.IFigure;
-import de.htwg.chess.view.tui.TextUI.PositionX;
+import de.htwg.chess.view.ChessBoardXAxisDescription;
 
 public abstract class Figure implements IFigure {
 
@@ -102,7 +102,7 @@ public abstract class Figure implements IFigure {
 
 	@Override
 	public String getStringPositionInformation() {
-		PositionX xPos = PositionX.values()[this.xPos];
+		Integer xPos = ChessBoardXAxisDescription.values()[this.xPos].ordinal();
 		int yPos = this.yPos + 1;
 		return xPos.toString().toUpperCase() + yPos;
 	}

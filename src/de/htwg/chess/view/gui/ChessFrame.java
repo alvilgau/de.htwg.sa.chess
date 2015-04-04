@@ -109,35 +109,9 @@ public class ChessFrame extends JFrame implements IObserver {
 		setJMenuBar(menuBar);
 		
 		/**
-		 * Create nested layout. Therefore we got a BorderLayout with nested
-		 * BorderLayout and GridBagLayout for plugins.
-		 */
-		JPanel statusAndPluginPanel = new JPanel();
-		statusAndPluginPanel.setLayout(new BorderLayout());
-		statusAndPluginPanel.add(statusPanel, BorderLayout.NORTH);
-
-//		Iterator<IDisplaySelectedFigurePlugin> iter = plugins.iterator();
-//
-//		/**
-//		 * Add plugins to GridBagLayout
-//		 */
-//		if (iter.hasNext()) {
-//			JPanel pluginPanel = new JPanel();
-//			pluginPanel.setLayout(new GridBagLayout());
-//
-//			while (iter.hasNext()) {
-//				final IDisplaySelectedFigurePlugin plugin = iter.next();
-//				JPanel panel = plugin.createPanel();
-//				iDisplaySelectedFigurePlugins.add(panel);
-//				pluginPanel.add(panel);
-//			}
-//			statusAndPluginPanel.add(pluginPanel, BorderLayout.CENTER);
-//		}
-		
-		/**
 		 * Add status and plugin panel and the game panel to frame
 		 */
-		add(statusAndPluginPanel, BorderLayout.NORTH);
+		add(statusPanel, BorderLayout.NORTH);
 		add(gamePanel, BorderLayout.CENTER);
 		/**
 		 * Window settings

@@ -1,6 +1,7 @@
 package de.htwg.chess.controller;
 
 import de.htwg.chess.controller.impl.Checkmate;
+import de.htwg.chess.model.IField;
 import de.htwg.chess.model.IFigure;
 import de.htwg.util.observer.IObservable;
 
@@ -140,6 +141,13 @@ public interface IChessController extends IObservable {
 	String getFieldValue(int x, int y);
 
 	/**
+	 * Returns an array with the filled fields in IField array.
+	 * 
+	 * @return array with filled fields
+	 */
+	IField[][] getFields();
+
+	/**
 	 * Gets the possible moves of the current selected figure
 	 * 
 	 * @return array with the possible moves
@@ -152,4 +160,18 @@ public interface IChessController extends IObservable {
 	 * @return check mate status
 	 */
 	Checkmate getCheckmate();
+	
+	/**
+	 * Gets the total turns for the white team.
+	 * 
+	 * @return int 
+	 */
+	int getTurnsWhite();
+	
+	/**
+	 * Gets the total turns for the black team.
+	 * 
+	 * @return int 
+	 */
+	int getTurnsBlack();
 }

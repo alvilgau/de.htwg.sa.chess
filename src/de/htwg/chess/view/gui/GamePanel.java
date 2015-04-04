@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import de.htwg.chess.controller.IChessController;
+import de.htwg.chess.view.ChessBoardXAxisDescription;
 
 public class GamePanel extends JPanel {
 
@@ -63,7 +64,9 @@ public class GamePanel extends JPanel {
 		// add column descriptions
 		this.add(new JLabel(""));
 		for (int i = 0; i < this.chessField.length; i++) {
-			this.add(new JLabel(COLS.substring(i, i + 1), SwingConstants.CENTER));
+			this.add(new JLabel(ChessBoardXAxisDescription
+					.getCharCoordinateUpperCaseAsString(i),
+					SwingConstants.CENTER));
 		}
 
 		// add fields

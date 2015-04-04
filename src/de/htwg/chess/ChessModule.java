@@ -9,6 +9,7 @@ import de.htwg.chess.model.IFieldFactory;
 import de.htwg.chess.model.IFigureFacotry;
 import de.htwg.chess.plugins.SelectedFigureStatus;
 import de.htwg.chess.plugins.StatusPlugin;
+import de.htwg.chess.plugins.TeamTurnsStatus;
 
 public class ChessModule extends AbstractModule {
 
@@ -21,7 +22,7 @@ public class ChessModule extends AbstractModule {
 
 		Multibinder<StatusPlugin> plugins = Multibinder.newSetBinder(binder(), StatusPlugin.class);
 		plugins.addBinding().to(SelectedFigureStatus.class);
-		// TODO: add plugin for showing turn count
+		plugins.addBinding().to(TeamTurnsStatus.class);
 	}
 
 }
