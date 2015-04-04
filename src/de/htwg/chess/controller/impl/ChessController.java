@@ -76,8 +76,7 @@ public class ChessController extends Observable implements IChessController {
 	 * Constructs a new Chess Controller
 	 */
 	@Inject
-	public ChessController(IFieldFactory fieldFactory,
-			IFigureFacotry figureFacotry) {
+	public ChessController(IFieldFactory fieldFactory, IFigureFacotry figureFacotry) {
 		this.fieldFactory = fieldFactory;
 		this.figureFacotry = figureFacotry;
 		this.fields = new IField[FIELD_SIZE][FIELD_SIZE];
@@ -101,49 +100,40 @@ public class ChessController extends Observable implements IChessController {
 	private void initTeamOne() {
 		this.figuresTeamWhite = new ArrayList<IFigure>(LIST_SIZE);
 
-		this.figuresTeamWhite.add(this.figureFacotry.createKing(FOUR, ZERO,
-				Team.white));
+		this.figuresTeamWhite.add(this.figureFacotry.createKing(FOUR, ZERO, Team.white));
 		this.fields[FOUR][ZERO] = this.fieldFactory.createField(true,
 				this.figuresTeamWhite.get(ZERO));
 
-		this.figuresTeamWhite.add(this.figureFacotry.createRook(ZERO, ZERO,
-				Team.white));
+		this.figuresTeamWhite.add(this.figureFacotry.createRook(ZERO, ZERO, Team.white));
 		this.fields[ZERO][ZERO] = this.fieldFactory.createField(true,
 				this.figuresTeamWhite.get(ONE));
 
-		this.figuresTeamWhite.add(this.figureFacotry.createKnight(ONE, ZERO,
-				Team.white));
-		this.fields[ONE][ZERO] = this.fieldFactory.createField(true,
-				this.figuresTeamWhite.get(TWO));
+		this.figuresTeamWhite.add(this.figureFacotry.createKnight(ONE, ZERO, Team.white));
+		this.fields[ONE][ZERO] = this.fieldFactory
+				.createField(true, this.figuresTeamWhite.get(TWO));
 
-		this.figuresTeamWhite.add(this.figureFacotry.createBishop(TWO, ZERO,
-				Team.white));
+		this.figuresTeamWhite.add(this.figureFacotry.createBishop(TWO, ZERO, Team.white));
 		this.fields[TWO][ZERO] = this.fieldFactory.createField(true,
 				this.figuresTeamWhite.get(THREE));
 
-		this.figuresTeamWhite.add(this.figureFacotry.createQueen(THREE, ZERO,
-				Team.white));
+		this.figuresTeamWhite.add(this.figureFacotry.createQueen(THREE, ZERO, Team.white));
 		this.fields[THREE][ZERO] = this.fieldFactory.createField(true,
 				this.figuresTeamWhite.get(FOUR));
 
-		this.figuresTeamWhite.add(this.figureFacotry.createBishop(FIVE, ZERO,
-				Team.white));
+		this.figuresTeamWhite.add(this.figureFacotry.createBishop(FIVE, ZERO, Team.white));
 		this.fields[FIVE][ZERO] = this.fieldFactory.createField(true,
 				this.figuresTeamWhite.get(FIVE));
 
-		this.figuresTeamWhite.add(this.figureFacotry.createKnight(SIX, ZERO,
-				Team.white));
-		this.fields[SIX][ZERO] = this.fieldFactory.createField(true,
-				this.figuresTeamWhite.get(SIX));
+		this.figuresTeamWhite.add(this.figureFacotry.createKnight(SIX, ZERO, Team.white));
+		this.fields[SIX][ZERO] = this.fieldFactory
+				.createField(true, this.figuresTeamWhite.get(SIX));
 
-		this.figuresTeamWhite.add(this.figureFacotry.createRook(SEVEN, ZERO,
-				Team.white));
+		this.figuresTeamWhite.add(this.figureFacotry.createRook(SEVEN, ZERO, Team.white));
 		this.fields[SEVEN][ZERO] = this.fieldFactory.createField(true,
 				this.figuresTeamWhite.get(SEVEN));
 
 		for (int i = 0; i <= SEVEN; i++) {
-			this.figuresTeamWhite.add(this.figureFacotry.createPawn(i, ONE,
-					Team.white, ONE));
+			this.figuresTeamWhite.add(this.figureFacotry.createPawn(i, ONE, Team.white, ONE));
 			this.fields[i][ONE] = this.fieldFactory.createField(true,
 					this.figuresTeamWhite.get(FIELD_SIZE + i));
 		}
@@ -155,49 +145,40 @@ public class ChessController extends Observable implements IChessController {
 	private void initTeamTwo() {
 		this.figuresTeamBlack = new ArrayList<IFigure>(LIST_SIZE);
 
-		this.figuresTeamBlack.add(this.figureFacotry.createKing(FOUR, SEVEN,
-				Team.black));
+		this.figuresTeamBlack.add(this.figureFacotry.createKing(FOUR, SEVEN, Team.black));
 		this.fields[FOUR][SEVEN] = this.fieldFactory.createField(true,
 				this.figuresTeamBlack.get(ZERO));
 
-		this.figuresTeamBlack.add(this.figureFacotry.createRook(ZERO, SEVEN,
-				Team.black));
+		this.figuresTeamBlack.add(this.figureFacotry.createRook(ZERO, SEVEN, Team.black));
 		this.fields[ZERO][SEVEN] = this.fieldFactory.createField(true,
 				this.figuresTeamBlack.get(ONE));
 
-		this.figuresTeamBlack.add(this.figureFacotry.createKnight(ONE, SEVEN,
-				Team.black));
+		this.figuresTeamBlack.add(this.figureFacotry.createKnight(ONE, SEVEN, Team.black));
 		this.fields[ONE][SEVEN] = this.fieldFactory.createField(true,
 				this.figuresTeamBlack.get(TWO));
 
-		this.figuresTeamBlack.add(this.figureFacotry.createBishop(TWO, SEVEN,
-				Team.black));
+		this.figuresTeamBlack.add(this.figureFacotry.createBishop(TWO, SEVEN, Team.black));
 		this.fields[TWO][SEVEN] = this.fieldFactory.createField(true,
 				this.figuresTeamBlack.get(THREE));
 
-		this.figuresTeamBlack.add(this.figureFacotry.createQueen(THREE, SEVEN,
-				Team.black));
+		this.figuresTeamBlack.add(this.figureFacotry.createQueen(THREE, SEVEN, Team.black));
 		this.fields[THREE][SEVEN] = this.fieldFactory.createField(true,
 				this.figuresTeamBlack.get(FOUR));
 
-		this.figuresTeamBlack.add(this.figureFacotry.createBishop(FIVE, SEVEN,
-				Team.black));
+		this.figuresTeamBlack.add(this.figureFacotry.createBishop(FIVE, SEVEN, Team.black));
 		this.fields[FIVE][SEVEN] = this.fieldFactory.createField(true,
 				this.figuresTeamBlack.get(FIVE));
 
-		this.figuresTeamBlack.add(this.figureFacotry.createKnight(SIX, SEVEN,
-				Team.black));
+		this.figuresTeamBlack.add(this.figureFacotry.createKnight(SIX, SEVEN, Team.black));
 		this.fields[SIX][SEVEN] = this.fieldFactory.createField(true,
 				this.figuresTeamBlack.get(SIX));
 
-		this.figuresTeamBlack.add(this.figureFacotry.createRook(SEVEN, SEVEN,
-				Team.black));
+		this.figuresTeamBlack.add(this.figureFacotry.createRook(SEVEN, SEVEN, Team.black));
 		this.fields[SEVEN][SEVEN] = this.fieldFactory.createField(true,
 				this.figuresTeamBlack.get(SEVEN));
 
 		for (int i = 0; i <= SEVEN; i++) {
-			this.figuresTeamBlack.add(this.figureFacotry.createPawn(i, SIX,
-					Team.black, SIX));
+			this.figuresTeamBlack.add(this.figureFacotry.createPawn(i, SIX, Team.black, SIX));
 			this.fields[i][SIX] = this.fieldFactory.createField(true,
 					this.figuresTeamBlack.get(FIELD_SIZE + i));
 		}
@@ -231,10 +212,9 @@ public class ChessController extends Observable implements IChessController {
 	 * Increments amount of total turns for a team.
 	 */
 	private void incrementTurnsForTeam() {
-		if(this.moveFigure.getTeam().equals(Team.white.name())) {
+		if (this.moveFigure.getTeam().equals(Team.white.name())) {
 			this.turnsWhite++;
-		}
-		else {
+		} else {
 			this.turnsBlack++;
 		}
 	}
@@ -243,8 +223,7 @@ public class ChessController extends Observable implements IChessController {
 	 * Updates the checkmate states of the kings
 	 */
 	private void updateCheckmate() {
-		this.checkmate.update(this.figuresTeamWhite, this.figuresTeamBlack,
-				this.fields);
+		this.checkmate.update(this.figuresTeamWhite, this.figuresTeamBlack, this.fields);
 
 		if (this.checkmate.isCheckWhite() && this.turn == 1) {
 			this.checkmate.nextStateWhite();
@@ -252,8 +231,7 @@ public class ChessController extends Observable implements IChessController {
 			this.checkmate.nextStateBlack();
 		}
 
-		this.gameover = this.checkmate.isMateBlack()
-				|| this.checkmate.isMateWhite();
+		this.gameover = this.checkmate.isMateBlack() || this.checkmate.isMateWhite();
 	}
 
 	/**
@@ -314,6 +292,21 @@ public class ChessController extends Observable implements IChessController {
 	@Override
 	public Checkmate getCheckmate() {
 		return this.checkmate;
+	}
+
+	@Override
+	public IField[][] getFields() {
+		return this.fields;
+	}
+
+	@Override
+	public int getTurnsWhite() {
+		return this.turnsWhite;
+	}
+
+	@Override
+	public int getTurnsBlack() {
+		return this.turnsBlack;
 	}
 
 	@Override
@@ -394,7 +387,7 @@ public class ChessController extends Observable implements IChessController {
 			this.fields[x][y].setSet(true);
 			this.fields[oldPosX][oldPosY].clear();
 			this.exchange = this.moveFigure.move(x, y);
-			
+
 			incrementTurnsForTeam();
 			nextTurn();
 
@@ -416,16 +409,14 @@ public class ChessController extends Observable implements IChessController {
 
 		if (team == Team.black) {
 			this.figuresTeamBlack.remove(this.moveFigure);
-			this.figuresTeamBlack.add(this.figureFacotry.createKnight(xPos,
-					yPos, team));
-			this.fields[xPos][yPos].setFigur(this.figuresTeamBlack
-					.get(this.figuresTeamBlack.size() - 1));
+			this.figuresTeamBlack.add(this.figureFacotry.createKnight(xPos, yPos, team));
+			this.fields[xPos][yPos]
+					.setFigur(this.figuresTeamBlack.get(this.figuresTeamBlack.size() - 1));
 		} else {
 			this.figuresTeamWhite.remove(this.moveFigure);
-			this.figuresTeamWhite.add(this.figureFacotry.createKnight(xPos,
-					yPos, team));
-			this.fields[xPos][yPos].setFigur(this.figuresTeamWhite
-					.get(this.figuresTeamWhite.size() - 1));
+			this.figuresTeamWhite.add(this.figureFacotry.createKnight(xPos, yPos, team));
+			this.fields[xPos][yPos]
+					.setFigur(this.figuresTeamWhite.get(this.figuresTeamWhite.size() - 1));
 		}
 
 		this.exchange = false;
@@ -441,16 +432,14 @@ public class ChessController extends Observable implements IChessController {
 
 		if (team == Team.black) {
 			this.figuresTeamBlack.remove(this.moveFigure);
-			this.figuresTeamBlack.add(this.figureFacotry.createBishop(xPos,
-					yPos, team));
-			this.fields[xPos][yPos].setFigur(this.figuresTeamBlack
-					.get(this.figuresTeamBlack.size() - 1));
+			this.figuresTeamBlack.add(this.figureFacotry.createBishop(xPos, yPos, team));
+			this.fields[xPos][yPos]
+					.setFigur(this.figuresTeamBlack.get(this.figuresTeamBlack.size() - 1));
 		} else {
 			this.figuresTeamWhite.remove(this.moveFigure);
-			this.figuresTeamWhite.add(this.figureFacotry.createBishop(xPos,
-					yPos, team));
-			this.fields[xPos][yPos].setFigur(this.figuresTeamWhite
-					.get(this.figuresTeamWhite.size() - 1));
+			this.figuresTeamWhite.add(this.figureFacotry.createBishop(xPos, yPos, team));
+			this.fields[xPos][yPos]
+					.setFigur(this.figuresTeamWhite.get(this.figuresTeamWhite.size() - 1));
 		}
 
 		this.exchange = false;
@@ -466,16 +455,14 @@ public class ChessController extends Observable implements IChessController {
 
 		if (team == Team.black) {
 			this.figuresTeamBlack.remove(this.moveFigure);
-			this.figuresTeamBlack.add(this.figureFacotry.createRook(xPos, yPos,
-					team));
-			this.fields[xPos][yPos].setFigur(this.figuresTeamBlack
-					.get(this.figuresTeamBlack.size() - 1));
+			this.figuresTeamBlack.add(this.figureFacotry.createRook(xPos, yPos, team));
+			this.fields[xPos][yPos]
+					.setFigur(this.figuresTeamBlack.get(this.figuresTeamBlack.size() - 1));
 		} else {
 			this.figuresTeamWhite.remove(this.moveFigure);
-			this.figuresTeamWhite.add(this.figureFacotry.createRook(xPos, yPos,
-					team));
-			this.fields[xPos][yPos].setFigur(this.figuresTeamWhite
-					.get(this.figuresTeamWhite.size() - 1));
+			this.figuresTeamWhite.add(this.figureFacotry.createRook(xPos, yPos, team));
+			this.fields[xPos][yPos]
+					.setFigur(this.figuresTeamWhite.get(this.figuresTeamWhite.size() - 1));
 		}
 
 		this.exchange = false;
@@ -491,16 +478,14 @@ public class ChessController extends Observable implements IChessController {
 
 		if (team == Team.black) {
 			this.figuresTeamBlack.remove(this.moveFigure);
-			this.figuresTeamBlack.add(this.figureFacotry.createQueen(xPos,
-					yPos, team));
-			this.fields[xPos][yPos].setFigur(this.figuresTeamBlack
-					.get(this.figuresTeamBlack.size() - 1));
+			this.figuresTeamBlack.add(this.figureFacotry.createQueen(xPos, yPos, team));
+			this.fields[xPos][yPos]
+					.setFigur(this.figuresTeamBlack.get(this.figuresTeamBlack.size() - 1));
 		} else {
 			this.figuresTeamWhite.remove(this.moveFigure);
-			this.figuresTeamWhite.add(this.figureFacotry.createQueen(xPos,
-					yPos, team));
-			this.fields[xPos][yPos].setFigur(this.figuresTeamWhite
-					.get(this.figuresTeamWhite.size() - 1));
+			this.figuresTeamWhite.add(this.figureFacotry.createQueen(xPos, yPos, team));
+			this.fields[xPos][yPos]
+					.setFigur(this.figuresTeamWhite.get(this.figuresTeamWhite.size() - 1));
 		}
 
 		this.exchange = false;
@@ -560,33 +545,5 @@ public class ChessController extends Observable implements IChessController {
 			}
 		}
 		return gameBoard.toJSONString();
-	}
-
-	/**
-	 * @return the moveFigure
-	 */
-	public IFigure getMoveFigure() {
-		return moveFigure;
-	}
-
-	/**
-	 * @return the fields
-	 */
-	public IField[][] getFields() {
-		return fields;
-	}
-
-	/**
-	 * @return the turnsWhite
-	 */
-	public int getTurnsWhite() {
-		return turnsWhite;
-	}
-
-	/**
-	 * @return the turnsBlack
-	 */
-	public int getTurnsBlack() {
-		return turnsBlack;
 	}
 }
