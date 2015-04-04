@@ -2,6 +2,14 @@ package de.htwg.chess.model;
 
 import java.util.List;
 
+/**
+ * @author Artur
+ *
+ */
+/**
+ * @author Artur
+ *
+ */
 public interface IFigure {
 
 	public enum Team {
@@ -56,4 +64,19 @@ public interface IFigure {
 	 * @return a list of all possible moves for the figure
 	 */
 	List<IField> getPossibleMoves(IField[][] fields);
+
+	/**
+	 * This returns the name of the selected figure.
+	 * 
+	 * @return name of selected figure
+	 */
+	String getFigureName();
+
+	/**
+	 * This function returns the position information as string as displayed in
+	 * the gui or tui. E.g. xpos 1, ypos 0 converts to A 1.
+	 * 
+	 * @return string
+	 */
+	String getStringPositionInformation();
 }

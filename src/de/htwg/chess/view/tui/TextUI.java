@@ -12,7 +12,7 @@ public class TextUI implements IObserver {
 
 	private IChessController controller;
 
-	private enum PositionX {
+	public enum PositionX {
 		a, b, c, d, e, f, g, h
 	};
 

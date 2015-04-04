@@ -8,6 +8,8 @@ import de.htwg.chess.controller.IChessController;
 import de.htwg.chess.model.IFieldFactory;
 import de.htwg.chess.model.IFigureFacotry;
 import de.htwg.chess.plugin.selectedfigure.IDisplaySelectedFigurePlugin;
+import de.htwg.sa.chess.plugins.GraphicalDisplaySelectedFigure;
+import de.htwg.sa.chess.plugins.TextualDisplaySelectedFigure;
 
 public class ChessModule extends AbstractModule {
 
@@ -20,8 +22,8 @@ public class ChessModule extends AbstractModule {
 
 		Multibinder<IDisplaySelectedFigurePlugin> plugins = Multibinder.newSetBinder(binder(),
 				IDisplaySelectedFigurePlugin.class);
-		// plugins.addBinding().to(GraphicalDisplaySelectedFigure.class);
-		// plugins.addBinding().to(TextualDisplaySelectedFigure.class);
+		plugins.addBinding().to(GraphicalDisplaySelectedFigure.class);
+		plugins.addBinding().to(TextualDisplaySelectedFigure.class);
 	}
 
 }

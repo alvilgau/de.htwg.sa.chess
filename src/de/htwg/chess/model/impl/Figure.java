@@ -2,6 +2,7 @@ package de.htwg.chess.model.impl;
 
 import de.htwg.chess.model.IField;
 import de.htwg.chess.model.IFigure;
+import de.htwg.chess.view.tui.TextUI.PositionX;
 
 public abstract class Figure implements IFigure {
 
@@ -86,11 +87,24 @@ public abstract class Figure implements IFigure {
 		int newXPos = this.xPos + x;
 		int newYPos = this.yPos + y;
 
-		if (newXPos > POS_MAX || newYPos > POS_MAX || newXPos < POS_MIN || newYPos < POS_MIN) {
+		if (newXPos > POS_MAX || newYPos > POS_MAX || newXPos < POS_MIN
+				|| newYPos < POS_MIN) {
 			return null;
 		}
 
 		return fields[newXPos][newYPos];
+	}
+
+	@Override
+	public String getFigureName() {
+		return this.getClass().getName();
+	}
+
+	@Override
+	public String getStringPositionInformation() {
+		PositionX xPos = PositionX.values()[this.xPos];
+		int yPos = this.yPos + 1;
+		return xPos.toString().toUpperCase() + yPos;
 	}
 
 }

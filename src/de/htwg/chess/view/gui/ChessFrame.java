@@ -1,17 +1,24 @@
 package de.htwg.chess.view.gui;
 
 import java.awt.BorderLayout;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 
 import com.google.inject.Inject;
 
 import de.htwg.chess.controller.IChessController;
+import de.htwg.chess.plugin.selectedfigure.IDisplaySelectedFigurePlugin;
 import de.htwg.util.observer.Event;
 import de.htwg.util.observer.IObserver;
 
@@ -24,6 +31,8 @@ public class ChessFrame extends JFrame implements IObserver {
 	private StatusPanel statusPanel;
 	private InfoPane infoPane;
 
+	private List<JPanel> iDisplaySelectedFigurePlugins = new ArrayList<JPanel>();
+
 	/**
 	 * Creates a new GUI
 	 * 
@@ -31,7 +40,8 @@ public class ChessFrame extends JFrame implements IObserver {
 	 *            - Chess Controller
 	 */
 	@Inject
-	public ChessFrame(final IChessController controller) {
+	public ChessFrame(final IChessController controller,
+			Set<IDisplaySelectedFigurePlugin> plugins) {
 		this.controller = controller;
 		controller.addObserver(this);
 
@@ -71,7 +81,37 @@ public class ChessFrame extends JFrame implements IObserver {
 		 * Add components to window
 		 */
 		setJMenuBar(menuBar);
-		add(statusPanel, BorderLayout.NORTH);
+
+		/**
+		 * Create nested layout. Therefore we got a BorderLayout with nested
+		 * BorderLayout and GridBagLayout for plugins.
+		 */
+		JPanel statusAndPluginPanel = new JPanel();
+		statusAndPluginPanel.setLayout(new BorderLayout());
+		statusAndPluginPanel.add(statusPanel, BorderLayout.NORTH);
+
+		Iterator<IDisplaySelectedFigurePlugin> iter = plugins.iterator();
+
+		/**
+		 * Add plugins to GridBagLayout
+		 */
+		if (iter.hasNext()) {
+			JPanel pluginPanel = new JPanel();
+			pluginPanel.setLayout(new GridBagLayout());
+
+			while (iter.hasNext()) {
+				final IDisplaySelectedFigurePlugin plugin = iter.next();
+				JPanel panel = plugin.createPanel();
+				iDisplaySelectedFigurePlugins.add(panel);
+				pluginPanel.add(panel);
+			}
+			statusAndPluginPanel.add(pluginPanel, BorderLayout.CENTER);
+		}
+		
+		/**
+		 * Add status and plugin panel and the game panel to frame
+		 */
+		add(statusAndPluginPanel, BorderLayout.NORTH);
 		add(gamePanel, BorderLayout.CENTER);
 
 		/**

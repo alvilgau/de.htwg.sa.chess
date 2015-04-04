@@ -12,8 +12,8 @@ import de.htwg.chess.controller.IChessController;
 import de.htwg.chess.model.IField;
 import de.htwg.chess.model.IFieldFactory;
 import de.htwg.chess.model.IFigure;
-import de.htwg.chess.model.IFigureFacotry;
 import de.htwg.chess.model.IFigure.Team;
+import de.htwg.chess.model.IFigureFacotry;
 import de.htwg.util.observer.Observable;
 
 public class ChessController extends Observable implements IChessController {
@@ -336,7 +336,7 @@ public class ChessController extends Observable implements IChessController {
 			notifyObservers();
 		}
 	}
-
+	
 	@Override
 	public void move(int x, int y) {
 		if (this.select && this.possibleMoves.contains(this.fields[x][y])) {
@@ -525,5 +525,12 @@ public class ChessController extends Observable implements IChessController {
 			}
 		}
 		return gameBoard.toJSONString();
+	}
+	
+	/**
+	 * @return the moveFigure
+	 */
+	public IFigure getMoveFigure() {
+		return moveFigure;
 	}
 }
