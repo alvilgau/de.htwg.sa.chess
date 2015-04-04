@@ -14,7 +14,7 @@ import javax.swing.JMenuItem;
 import com.google.inject.Inject;
 
 import de.htwg.chess.controller.IChessController;
-import de.htwg.chess.plugins.status.StatusPlugin;
+import de.htwg.chess.plugins.StatusPlugin;
 import de.htwg.util.observer.Event;
 import de.htwg.util.observer.IObserver;
 

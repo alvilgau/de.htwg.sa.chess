@@ -1,4 +1,4 @@
-package de.htwg.chess.plugins.status;
+package de.htwg.chess.plugins;
 
 import javax.swing.JComponent;
 

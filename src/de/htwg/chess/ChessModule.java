@@ -8,7 +8,7 @@ import de.htwg.chess.controller.IChessController;
 import de.htwg.chess.model.IFieldFactory;
 import de.htwg.chess.model.IFigureFacotry;
 import de.htwg.chess.plugins.SelectedFigureStatus;
-import de.htwg.chess.plugins.status.StatusPlugin;
+import de.htwg.chess.plugins.StatusPlugin;
 
 public class ChessModule extends AbstractModule {
 
