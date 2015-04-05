@@ -290,11 +290,6 @@ public class ChessController extends Observable implements IChessController {
 	}
 
 	@Override
-	public Checkmate getCheckmate() {
-		return this.checkmate;
-	}
-
-	@Override
 	public IField[][] getFields() {
 		return this.fields;
 	}
