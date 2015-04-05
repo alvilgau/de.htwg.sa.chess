@@ -12,117 +12,117 @@ import com.google.inject.Injector;
 
 import de.htwg.chess.ChessModule;
 import de.htwg.chess.controller.IChessController;
-import de.htwg.chess.controller.impl.ChessController;
+import de.htwg.chess.model.impl.Bishop;
+import de.htwg.chess.model.impl.Knight;
+import de.htwg.chess.model.impl.Pawn;
+import de.htwg.chess.model.impl.Queen;
+import de.htwg.chess.model.impl.Rook;
 
 public class ControllerTest {
 
 	Injector injector;
 	ChessController controller;
-	String start;
 
 	@Before
 	public void setUp() {
 		this.injector = Guice.createInjector(new ChessModule());
 		this.controller = (ChessController) this.injector.getInstance(IChessController.class);
-		this.start = this.controller.toString();
-	}
-
-	@Test
-	public void testToString() {
-		assertTrue(this.controller.toString().contains("T  P  L  D  K  L  P  T  "));
 	}
 
 	@Test
 	public void testSelect() {
 		// Invalid select
 		this.controller.select(0, 3);
-		this.controller.move(3, 3);
 		assertFalse(this.controller.isSelect());
-		assertTrue(this.start.equals(this.controller.toString()));
 
 		// Invalid select
 		this.controller.select(0, 6);
-		this.controller.move(0, 5);
-		assertTrue(this.start.equals(this.controller.toString()));
+		assertFalse(this.controller.isSelect());
 	}
 
 	@Test
 	public void testMove() {
 		// Correct move
 		assertTrue(this.controller.isWhiteTurn());
+		assertFalse(this.controller.getFields()[2][2].isSet());
 		this.controller.select(1, 0);
 		this.controller.move(2, 2);
-		assertFalse(this.start.equals(this.controller.toString()));
-		this.start = this.controller.toString();
+		assertTrue(this.controller.getFields()[2][2].isSet());
 
 		// Correct move
 		assertFalse(this.controller.isWhiteTurn());
+		assertFalse(this.controller.getFields()[0][5].isSet());
 		this.controller.select(0, 6);
 		this.controller.move(0, 5);
-		assertFalse(this.start.equals(this.controller.toString()));
-		this.start = this.controller.toString();
+		assertTrue(this.controller.getFields()[0][5].isSet());
 
 		// Invalid move
+		assertFalse(this.controller.getFields()[3][3].isSet());
 		this.controller.select(0, 1);
 		this.controller.move(3, 3);
-		assertTrue(this.start.equals(this.controller.toString()));
+		assertFalse(this.controller.getFields()[3][3].isSet());
 	}
 
 	@Test
 	public void testRestart() {
 		this.controller.select(1, 0);
 		this.controller.move(2, 2);
-		assertFalse(this.start.equals(this.controller.toString()));
+		assertTrue(this.controller.getFields()[2][2].isSet());
 
 		// Restart
 		this.controller.restart();
-		assertEquals(this.start, this.controller.toString());
+		assertFalse(this.controller.getFields()[2][2].isSet());
 	}
 
 	@Test
 	public void testHandleMovement() {
 		// Select
 		this.controller.handleMovement(0, 1);
+		assertTrue(this.controller.isSelect());
+		assertFalse(this.controller.getFields()[0][3].isSet());
+
 		// Move
 		this.controller.handleMovement(0, 3);
-		assertFalse(this.start.equals(this.controller.toString()));
-		this.start = this.controller.toString();
+		assertTrue(this.controller.getFields()[0][3].isSet());
 
 		// Fail handle because of exchange
 		this.controller.setExchange(true);
 		this.controller.handleMovement(0, 3);
+		assertFalse(this.controller.isSelect());
 		this.controller.handleMovement(0, 5);
-		assertTrue(this.start.equals(this.controller.toString()));
+		assertFalse(this.controller.getFields()[0][5].isSet());
 		this.controller.setExchange(false);
 
 		// Fail handle because of game over
 		this.controller.setGameover(true);
 		this.controller.handleMovement(0, 3);
+		assertFalse(this.controller.isSelect());
 		this.controller.handleMovement(0, 5);
-		assertTrue(this.start.equals(this.controller.toString()));
+		assertFalse(this.controller.getFields()[0][5].isSet());
 	}
 
 	@Test
 	public void testExchange() {
 		this.controller.select(0, 1);
 		this.controller.move(0, 3);
-		this.controller.select(0, 7);
+		this.controller.select(0, 6);
+		assertTrue(this.controller.getFields()[0][6].getFigur() instanceof Pawn);
 
 		// Exchange with Knight
 		this.controller.exchangeKnight();
-		assertTrue(this.controller.toString().contains("P  P  L  D  K  L  P  T  "));
+		assertTrue(this.controller.getFields()[0][6].getFigur() instanceof Knight);
 
 		// Exchange with Bishop
 		this.controller.exchangeBishop();
-		assertTrue(this.controller.toString().contains("L  P  L  D  K  L  P  T  "));
+		assertTrue(this.controller.getFields()[0][6].getFigur() instanceof Bishop);
 
 		// Exchange with Rook
 		this.controller.exchangeRook();
-		assertTrue(this.controller.toString().contains("T  P  L  D  K  L  P  T  "));
+		assertTrue(this.controller.getFields()[0][6].getFigur() instanceof Rook);
 
 		// Exchange with Queen
 		this.controller.exchangeQueen();
-		assertTrue(this.controller.toString().contains("D  P  L  D  K  L  P  T  "));
+		assertTrue(this.controller.getFields()[0][6].getFigur() instanceof Queen);
 	}
 
 	@Test
@@ -211,6 +211,20 @@ public class ControllerTest {
 		this.controller.select(4, 6);
 		this.controller.move(5, 5);
 		assertTrue(this.controller.isGameover());
+	}
+
+	@Test
+	public void testTurnCount() {
+		assertEquals(this.controller.getTurnsBlack(), 0);
+		assertEquals(this.controller.getTurnsWhite(), 0);
+
+		this.controller.select(0, 1);
+		this.controller.move(0, 3);
+		assertEquals(this.controller.getTurnsWhite(), 1);
+
+		this.controller.select(0, 6);
+		this.controller.move(0, 5);
+		assertEquals(this.controller.getTurnsBlack(), 1);
 	}
 
 	@Test
