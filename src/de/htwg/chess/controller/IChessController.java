@@ -1,5 +1,6 @@
 package de.htwg.chess.controller;
 
+import de.htwg.chess.controller.impl.Checkmate;
 import de.htwg.chess.model.IField;
 import de.htwg.chess.model.IFigure;
 import de.htwg.util.observer.IObservable;
@@ -152,6 +153,13 @@ public interface IChessController extends IObservable {
 	 * @return array with the possible moves
 	 */
 	int[][] getPossibleMoves();
+
+	/**
+	 * Gets the check mate status of the game
+	 * 
+	 * @return check mate status
+	 */
+	Checkmate getCheckmate();
 
 	/**
 	 * Gets the total turns for the white team.

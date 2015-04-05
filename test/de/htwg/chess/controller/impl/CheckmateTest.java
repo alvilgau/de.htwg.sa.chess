@@ -30,8 +30,11 @@ public class CheckmateTest {
 		// Move team white
 		this.controller.select(4, 1);
 		this.controller.move(4, 3);
-		// Test statusMessage
 		assertEquals("", this.controller.getCheckmateMessage());
+		assertFalse(this.controller.getCheckmate().isCheckBlack());
+		assertFalse(this.controller.getCheckmate().isCheckWhite());
+		assertFalse(this.controller.getCheckmate().isMateBlack());
+		assertFalse(this.controller.getCheckmate().isMateWhite());
 
 		// Move team black
 		this.controller.select(3, 6);
@@ -53,14 +56,16 @@ public class CheckmateTest {
 		this.controller.select(3, 5);
 		this.controller.move(4, 4);
 		assertFalse(this.controller.isGameover());
-		// Test statusMessage
+		// Test check
+		assertTrue(this.controller.getCheckmate().isCheckWhite());
 		assertEquals("White King is in a check! ", this.controller.getCheckmateMessage());
 
 		// Move team white
 		this.controller.select(0, 2);
 		this.controller.move(0, 3);
 		assertTrue(this.controller.isGameover());
-		// Test statusMessage
+		// Test check mate
+		assertTrue(this.controller.getCheckmate().isMateWhite());
 		assertEquals("White King is mate. Team Black has won. - Game Over! ",
 				this.controller.getCheckmateMessage());
 	}
@@ -70,8 +75,11 @@ public class CheckmateTest {
 		// Move team white
 		this.controller.select(3, 1);
 		this.controller.move(3, 3);
-		// Test statusMessage
 		assertEquals("", this.controller.getCheckmateMessage());
+		assertFalse(this.controller.getCheckmate().isCheckBlack());
+		assertFalse(this.controller.getCheckmate().isCheckWhite());
+		assertFalse(this.controller.getCheckmate().isMateBlack());
+		assertFalse(this.controller.getCheckmate().isMateWhite());
 
 		// Move team black
 		this.controller.select(4, 6);
@@ -89,14 +97,16 @@ public class CheckmateTest {
 		this.controller.select(3, 2);
 		this.controller.move(4, 3);
 		assertFalse(this.controller.isGameover());
-		// Test statusMessage
+		// Test check
+		assertTrue(this.controller.getCheckmate().isCheckBlack());
 		assertEquals("Black King is in a check!", this.controller.getCheckmateMessage());
 
 		// Move team black
 		this.controller.select(0, 6);
 		this.controller.move(0, 5);
 		assertTrue(this.controller.isGameover());
-		// Test statusMessage
+		// Test check mate
+		assertTrue(this.controller.getCheckmate().isMateBlack());
 		assertEquals("Black King is mate. Team White has won. - Game Over!",
 				this.controller.getCheckmateMessage());
 	}

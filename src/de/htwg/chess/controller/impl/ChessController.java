@@ -295,6 +295,11 @@ public class ChessController extends Observable implements IChessController {
 	}
 
 	@Override
+	public Checkmate getCheckmate() {
+		return this.checkmate;
+	}
+
+	@Override
 	public int getTurnsWhite() {
 		return this.turnsWhite;
 	}
