@@ -14,6 +14,9 @@ import de.htwg.chess.model.IFieldFactory;
 import de.htwg.chess.model.IFigure;
 import de.htwg.chess.model.IFigure.Team;
 import de.htwg.chess.model.IFigureFacotry;
+import de.htwg.chess.persistence.IGenericDao;
+import de.htwg.chess.persistence.hibernate.IFieldDao;
+import de.htwg.chess.persistence.hibernate.IGameDao;
 import de.htwg.util.observer.Observable;
 
 /**
@@ -71,14 +74,21 @@ public class ChessController extends Observable implements IChessController {
 	// count the amount of turns a player has made
 	private int turnsWhite = 0;
 	private int turnsBlack = 0;
+	
+	private IGenericDao<IGameDao> gameDao;
+	private IGenericDao<IFieldDao> fieldsDao;
 
 	/**
 	 * Constructs a new Chess Controller
 	 */
 	@Inject
-	public ChessController(IFieldFactory fieldFactory, IFigureFacotry figureFacotry) {
+	public ChessController(IFieldFactory fieldFactory, IFigureFacotry figureFacotry, 
+			IGenericDao<IGameDao> gameDao, IGenericDao<IFieldDao> fieldDao) {
 		this.fieldFactory = fieldFactory;
 		this.figureFacotry = figureFacotry;
+		this.gameDao = gameDao;
+		this.fieldsDao = fieldDao;
+		
 		this.fields = new IField[FIELD_SIZE][FIELD_SIZE];
 		this.checkmate = new Checkmate();
 		this.moveFigure = null;
@@ -546,4 +556,8 @@ public class ChessController extends Observable implements IChessController {
 		}
 		return gameBoard.toJSONString();
 	}
+	/*
+	public Game saveGame() {
+		new Game(...);
+	}*/
 }
