@@ -4,6 +4,7 @@
 	<groupId>de.htwg.sa.chess</groupId>
 	<artifactId>de.htwg.sa.chess</artifactId>
 	<version>0.0.2-SNAPSHOT</version>
+
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<testSourceDirectory>test</testSourceDirectory>
@@ -40,6 +41,7 @@
 			</plugin>
 		</plugins>
 	</build>
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -67,7 +69,20 @@
 			<artifactId>json-simple</artifactId>
 			<version>1.1.1</version>
 		</dependency>
+		<dependency>
+			<groupId>com.db4o</groupId>
+			<artifactId>db4o-core-java5</artifactId>
+			<version>8.0.184.15484</version>
+		</dependency>
 	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>sonatype-forge</id>
+			<url>https://repository.sonatype.org/content/groups/forge/</url>
+		</repository>
+	</repositories>
+
 	<distributionManagement>
 		<snapshotRepository>
 			<id>lenny2</id>

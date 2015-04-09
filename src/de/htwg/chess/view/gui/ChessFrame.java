@@ -20,6 +20,11 @@ import de.htwg.util.observer.IObserver;
 
 public class ChessFrame extends JFrame implements IObserver {
 
+	/**
+	 * TODO: Loading game (Dialog mit Anzeige der gespeicherten Spiele als
+	 * Tabelle)
+	 */
+
 	private static final long serialVersionUID = 1L;
 
 	private IChessController controller;
@@ -40,7 +45,7 @@ public class ChessFrame extends JFrame implements IObserver {
 
 		JMenuBar menuBar;
 		JMenu gameMenu;
-		JMenuItem newMenuItem, quitMenuItem;
+		JMenuItem newMenuItem, saveMenuItem, quitMenuItem;
 
 		/**
 		 * Game Menu
@@ -57,6 +62,15 @@ public class ChessFrame extends JFrame implements IObserver {
 			}
 		});
 		gameMenu.add(newMenuItem);
+
+		saveMenuItem = new JMenuItem("Save Game");
+		saveMenuItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ChessFrame.this.infoPane.handleSaveGame(ChessFrame.this);
+			}
+		});
+		gameMenu.add(saveMenuItem);
 
 		quitMenuItem = new JMenuItem("Quit");
 		quitMenuItem.addActionListener(new ActionListener() {

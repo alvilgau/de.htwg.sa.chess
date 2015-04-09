@@ -14,9 +14,8 @@ import de.htwg.chess.model.IFieldFactory;
 import de.htwg.chess.model.IFigure;
 import de.htwg.chess.model.IFigure.Team;
 import de.htwg.chess.model.IFigureFacotry;
-import de.htwg.chess.persistence.IGenericDao;
-import de.htwg.chess.persistence.hibernate.IFieldDao;
-import de.htwg.chess.persistence.hibernate.IGameDao;
+import de.htwg.chess.persistence.ChessPojo;
+import de.htwg.chess.persistence.IChessDao;
 import de.htwg.util.observer.Observable;
 
 /**
@@ -74,25 +73,21 @@ public class ChessController extends Observable implements IChessController {
 	// count the amount of turns a player has made
 	private int turnsWhite = 0;
 	private int turnsBlack = 0;
-	
-	private IGenericDao<IGameDao> gameDao;
-	private IGenericDao<IFieldDao> fieldsDao;
+
+	private IChessDao dao;
 
 	/**
 	 * Constructs a new Chess Controller
 	 */
 	@Inject
-	public ChessController(IFieldFactory fieldFactory, IFigureFacotry figureFacotry, 
-			IGenericDao<IGameDao> gameDao, IGenericDao<IFieldDao> fieldDao) {
+	public ChessController(IFieldFactory fieldFactory, IFigureFacotry figureFacotry, IChessDao dao) {
 		this.fieldFactory = fieldFactory;
 		this.figureFacotry = figureFacotry;
-		this.gameDao = gameDao;
-		this.fieldsDao = fieldDao;
-		
+		this.dao = dao;
 		this.fields = new IField[FIELD_SIZE][FIELD_SIZE];
+		this.possibleMoves = new ArrayList<>();
 		this.checkmate = new Checkmate();
 		this.moveFigure = null;
-		this.possibleMoves = new ArrayList<>();
 		this.select = false;
 		this.exchange = false;
 		this.gameover = false;
@@ -556,8 +551,25 @@ public class ChessController extends Observable implements IChessController {
 		}
 		return gameBoard.toJSONString();
 	}
-	/*
-	public Game saveGame() {
-		new Game(...);
-	}*/
+
+	@Override
+	public void saveToDB(String gameName) {
+		if (this.exchange || this.gameover) {
+			return;
+		}
+
+		ChessPojo game = new ChessPojo();
+		game.setName(gameName);
+		game.setTurn(this.turn);
+		game.setTurnsBlack(this.turnsBlack);
+		game.setTurnsWhite(this.turnsWhite);
+		game.setFields(this.fields);
+		this.dao.saveGame(game);
+	}
+
+	@Override
+	public void loadFromDB(String id) {
+		// TODO implement loading
+
+	}
 }

@@ -19,11 +19,11 @@ public final class Chess {
 	private static IChessController controller;
 	private static Chess instance;
 	
-	private Chess(int dbtype) {
+	private Chess() {
 		// Set up logging through log4j
 		PropertyConfigurator.configure("log4j.properties");
 
-		Injector injector = Guice.createInjector(new ChessModule(dbtype));
+		Injector injector = Guice.createInjector(new ChessModule());
 
 		scanner = new Scanner(System.in);
 		controller = injector.getInstance(IChessController.class);
@@ -33,9 +33,9 @@ public final class Chess {
 		gui = injector.getInstance(ChessFrame.class);
 	}
 
-	public static Chess getInstance(String[] args) {
+	public static Chess getInstance() {
 		if (instance == null) {
-			instance = new Chess(extractDatabaseType(args));
+			instance = new Chess();
 		}
 		return instance;
 	}
@@ -53,21 +53,12 @@ public final class Chess {
 	}
 
 	public static void main(String[] args) {
-		getInstance(args);
+		getInstance();
 		tui.printTUI();
 
 		boolean run = true;
 		while (run) {
 			run = tui.processInputLine(scanner.next());
-		}
-	}
-	
-	private static int extractDatabaseType(String[] args) {
-		if(args.length > 0) {
-			return Integer.valueOf(args[0]);
-		}
-		else {
-			return 0;
 		}
 	}
 

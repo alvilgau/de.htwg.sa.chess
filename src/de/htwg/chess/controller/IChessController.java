@@ -174,4 +174,16 @@ public interface IChessController extends IObservable {
 	 * @return int
 	 */
 	int getTurnsBlack();
+
+	/**
+	 * Saves a game into the database
+	 * 
+	 * @param gameName
+	 */
+	void saveToDB(String gameName);
+
+	/**
+	 * Loads a game from the database
+	 */
+	void loadFromDB(String id);
 }
