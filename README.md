@@ -2,4 +2,4 @@
 Chess for the lecture Software Architecture
 
 ## TODO
-create plugin, which adds a textual or graphical representation of the selected figur. 
+Loading and (saving) game from the GUI.
