@@ -1,6 +1,7 @@
 package de.htwg.chess.controller.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -14,7 +15,7 @@ import de.htwg.chess.model.IFieldFactory;
 import de.htwg.chess.model.IFigure;
 import de.htwg.chess.model.IFigure.Team;
 import de.htwg.chess.model.IFigureFacotry;
-import de.htwg.chess.persistence.ChessPojo;
+import de.htwg.chess.persistence.ChessGame;
 import de.htwg.chess.persistence.IChessDao;
 import de.htwg.util.observer.Observable;
 
@@ -558,8 +559,9 @@ public class ChessController extends Observable implements IChessController {
 			return;
 		}
 
-		ChessPojo game = new ChessPojo();
+		ChessGame game = new ChessGame();
 		game.setName(gameName);
+		game.setSaveDate(new Date());
 		game.setTurn(this.turn);
 		game.setTurnsBlack(this.turnsBlack);
 		game.setTurnsWhite(this.turnsWhite);
@@ -571,5 +573,12 @@ public class ChessController extends Observable implements IChessController {
 	public void loadFromDB(String id) {
 		// TODO implement loading
 
+	}
+
+	/**
+	 * @return the dao
+	 */
+	public final IChessDao getDao() {
+		return dao;
 	}
 }

@@ -6,7 +6,7 @@ import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.query.Predicate;
 
-import de.htwg.chess.persistence.ChessPojo;
+import de.htwg.chess.persistence.ChessGame;
 import de.htwg.chess.persistence.IChessDao;
 
 public class ChessDb4oDao implements IChessDao {
@@ -18,17 +18,17 @@ public class ChessDb4oDao implements IChessDao {
 	}
 
 	@Override
-	public void saveGame(ChessPojo game) {
+	public void saveGame(ChessGame game) {
 		this.db.store(game);
 	}
 
 	@Override
-	public ChessPojo getGame(String id) {
-		List<ChessPojo> games = this.db.query(new Predicate<ChessPojo>() {
+	public ChessGame getGame(String id) {
+		List<ChessGame> games = this.db.query(new Predicate<ChessGame>() {
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public boolean match(ChessPojo game) {
+			public boolean match(ChessGame game) {
 				return game.getId().equals(id);
 			}
 		});
@@ -41,11 +41,11 @@ public class ChessDb4oDao implements IChessDao {
 
 	@Override
 	public boolean containsGame(String id) {
-		List<ChessPojo> games = this.db.query(new Predicate<ChessPojo>() {
+		List<ChessGame> games = this.db.query(new Predicate<ChessGame>() {
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public boolean match(ChessPojo game) {
+			public boolean match(ChessGame game) {
 				return game.getId().equals(id);
 			}
 		});
@@ -55,7 +55,7 @@ public class ChessDb4oDao implements IChessDao {
 
 	@Override
 	public boolean deleteGame(String id) {
-		ChessPojo game = getGame(id);
+		ChessGame game = getGame(id);
 		if (game != null) {
 			this.db.delete(game);
 			return true;
@@ -64,8 +64,8 @@ public class ChessDb4oDao implements IChessDao {
 	}
 
 	@Override
-	public List<ChessPojo> getAllGames() {
-		return this.db.query(ChessPojo.class);
+	public List<ChessGame> getAllGames() {
+		return this.db.query(ChessGame.class);
 	}
 
 }

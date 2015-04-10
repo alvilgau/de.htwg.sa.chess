@@ -45,7 +45,7 @@ public class ChessFrame extends JFrame implements IObserver {
 
 		JMenuBar menuBar;
 		JMenu gameMenu;
-		JMenuItem newMenuItem, saveMenuItem, quitMenuItem;
+		JMenuItem newMenuItem, saveMenuItem, loadMenuItem, quitMenuItem;
 
 		/**
 		 * Game Menu
@@ -70,7 +70,18 @@ public class ChessFrame extends JFrame implements IObserver {
 				ChessFrame.this.infoPane.handleSaveGame(ChessFrame.this);
 			}
 		});
+		
 		gameMenu.add(saveMenuItem);
+		
+		;
+		loadMenuItem = new JMenuItem("Load Game");
+		loadMenuItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ChessFrame.this.infoPane.handleLoadGame(ChessFrame.this, controller.getDao().getAllGames());
+			}
+		});
+		gameMenu.add(loadMenuItem);
 
 		quitMenuItem = new JMenuItem("Quit");
 		quitMenuItem.addActionListener(new ActionListener() {

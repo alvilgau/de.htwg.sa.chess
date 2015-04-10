@@ -3,6 +3,7 @@ package de.htwg.chess.controller;
 import de.htwg.chess.controller.impl.Checkmate;
 import de.htwg.chess.model.IField;
 import de.htwg.chess.model.IFigure;
+import de.htwg.chess.persistence.IChessDao;
 import de.htwg.util.observer.IObservable;
 
 public interface IChessController extends IObservable {
@@ -186,4 +187,11 @@ public interface IChessController extends IObservable {
 	 * Loads a game from the database
 	 */
 	void loadFromDB(String id);
+	
+	/**
+	 * Returns the Database access object to query for values.
+	 * 
+	 * @return IChessDao
+	 */
+	IChessDao getDao(); 
 }

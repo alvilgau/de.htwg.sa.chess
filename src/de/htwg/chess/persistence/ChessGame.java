@@ -1,14 +1,17 @@
 package de.htwg.chess.persistence;
 
+import java.util.Date;
 import java.util.UUID;
 
 import de.htwg.chess.model.IField;
 
-public class ChessPojo {
+public class ChessGame {
 
 	private String id;
 
 	private String name;
+	
+	private Date saveDate;
 
 	private int turn;
 
@@ -18,7 +21,7 @@ public class ChessPojo {
 
 	private IField fields[][];
 
-	public ChessPojo() {
+	public ChessGame() {
 		this.id = UUID.randomUUID().toString();
 	}
 
@@ -36,6 +39,17 @@ public class ChessPojo {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	/**
+	 * @return the saved
+	 */
+	public Date getSaveDate() {
+		return this.saveDate;
+	}
+
+	public void setSaveDate(Date saveDate) {
+		this.saveDate = saveDate;
 	}
 
 	public int getTurn() {
@@ -69,5 +83,4 @@ public class ChessPojo {
 	public void setFields(IField[][] fields) {
 		this.fields = fields;
 	}
-
 }
