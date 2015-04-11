@@ -1,5 +1,6 @@
 package de.htwg.chess.controller.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -664,7 +665,8 @@ public class ChessController extends Observable implements IChessController {
 		this.turnsWhite = chessGame.getTurnsWhite();
 		this.turnsBlack = chessGame.getTurnsBlack();
 		
-		this.statusMessage = "Welcome to Chess";
+		String dateTimeString = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(chessGame.getSaveDate());
+		this.statusMessage = "Loaded game " + chessGame.getName() + " " + dateTimeString;
 		String playerColorTurn = (chessGame.getTurn() == Team.white.ordinal()) ? Team.white.name() : Team.black.name(); 
 		this.turnMessage = "Team " + playerColorTurn + "'s turn";
 		
