@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
-import com.db4o.query.Predicate;
+import com.db4o.query.Query;
 
 import de.htwg.chess.persistence.ChessGame;
 import de.htwg.chess.persistence.IChessDao;
@@ -24,14 +24,10 @@ public class ChessDb4oDao implements IChessDao {
 
 	@Override
 	public ChessGame getGame(String id) {
-		List<ChessGame> games = this.db.query(new Predicate<ChessGame>() {
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public boolean match(ChessGame game) {
-				return game.getId().equals(id);
-			}
-		});
+		Query query = this.db.query();
+		query.constrain(ChessGame.class);
+		query.descend("id").constrain(id);
+		List<ChessGame> games = query.execute();
 
 		if (games.size() > 0) {
 			return games.get(0);
@@ -41,16 +37,7 @@ public class ChessDb4oDao implements IChessDao {
 
 	@Override
 	public boolean containsGame(String id) {
-		List<ChessGame> games = this.db.query(new Predicate<ChessGame>() {
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public boolean match(ChessGame game) {
-				return game.getId().equals(id);
-			}
-		});
-
-		return games.size() > 0;
+		return this.getGame(id) != null;
 	}
 
 	@Override

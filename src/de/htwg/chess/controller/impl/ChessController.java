@@ -653,6 +653,7 @@ public class ChessController extends Observable implements IChessController {
 	@Override
 	public void loadFromDB(String id) {
 		ChessGame chessGame = this.dao.getGame(id);
+		this.fields = null;
 		this.fields = chessGame.getFields();
 		
 		this.possibleMoves = new ArrayList<>();
@@ -666,11 +667,11 @@ public class ChessController extends Observable implements IChessController {
 		this.turnsBlack = chessGame.getTurnsBlack();
 		
 		String dateTimeString = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(chessGame.getSaveDate());
-		this.statusMessage = "Loaded game " + chessGame.getName() + " " + dateTimeString;
+		this.statusMessage = "Loaded game " + chessGame.getName() + " - " + dateTimeString;
 		String playerColorTurn = (chessGame.getTurn() == Team.white.ordinal()) ? Team.white.name() : Team.black.name(); 
 		this.turnMessage = "Team " + playerColorTurn + "'s turn";
 		
-		initTeamFromFields(chessGame.getFields());
+		initTeamFromFields(this.fields);
 		this.checkmate.reset();
 		notifyObservers();
 	}
