@@ -73,13 +73,18 @@ public class ChessFrame extends JFrame implements IObserver {
 		
 		gameMenu.add(saveMenuItem);
 		
-		;
 		loadMenuItem = new JMenuItem("Load Game");
 		loadMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ChessFrame.this.infoPane.handleLoadGame(ChessFrame.this, controller.getDao().getAllGames());
+				String idOfSelectedGame = ChessFrame.this.infoPane
+						.handleLoadGame(ChessFrame.this, controller.getDao()
+								.getAllGames());
+				if(idOfSelectedGame != null) {
+					controller.loadFromDB(idOfSelectedGame);
+				}
 			}
+			
 		});
 		gameMenu.add(loadMenuItem);
 

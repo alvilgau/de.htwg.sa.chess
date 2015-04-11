@@ -4,6 +4,10 @@ import de.htwg.chess.model.IField;
 import de.htwg.chess.model.IFigure;
 
 public abstract class Figure implements IFigure {
+	
+	public enum FigureEnum {
+		Pawn, Rook, Knight, Bishop, Queen, King
+	}
 
 	static final int POS_MAX = 7;
 	static final int POS_MIN = 0;
@@ -92,5 +96,4 @@ public abstract class Figure implements IFigure {
 
 		return fields[newXPos][newYPos];
 	}
-
 }

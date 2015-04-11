@@ -15,6 +15,7 @@ import de.htwg.chess.model.IFieldFactory;
 import de.htwg.chess.model.IFigure;
 import de.htwg.chess.model.IFigure.Team;
 import de.htwg.chess.model.IFigureFacotry;
+import de.htwg.chess.model.impl.Figure.FigureEnum;
 import de.htwg.chess.persistence.ChessGame;
 import de.htwg.chess.persistence.IChessDao;
 import de.htwg.util.observer.Observable;
@@ -72,8 +73,8 @@ public class ChessController extends Observable implements IChessController {
 	private String turnMessage;
 
 	// count the amount of turns a player has made
-	private int turnsWhite = 0;
-	private int turnsBlack = 0;
+	private int turnsWhite;
+	private int turnsBlack;
 
 	private IChessDao dao;
 
@@ -86,24 +87,42 @@ public class ChessController extends Observable implements IChessController {
 		this.figureFacotry = figureFacotry;
 		this.dao = dao;
 		this.fields = new IField[FIELD_SIZE][FIELD_SIZE];
-		this.possibleMoves = new ArrayList<>();
 		this.checkmate = new Checkmate();
+		
+		initNewGame();
+	}
+
+	@Override
+	public void restart() {
+		initNewGame();
+		
+		this.checkmate.reset();
+		notifyObservers();
+	}
+	
+	private void initNewGame() {
+		this.possibleMoves = new ArrayList<>();
 		this.moveFigure = null;
 		this.select = false;
 		this.exchange = false;
 		this.gameover = false;
+		
 		this.turn = 0;
+		this.turnsWhite = 0;
+		this.turnsBlack = 0;
+		
 		this.statusMessage = "Welcome to Chess";
-		this.turnMessage = "Team white's turn";
-		initTeamOne();
-		initTeamTwo();
+		this.turnMessage = "Team " + Team.white.name() + "'s turn";
+		
+		initTeamWhite();
+		initTeamBlack();
 		initFieldsRest();
 	}
 
 	/**
-	 * Initialize the list and fields for Player 1
+	 * Initialize the list and fields for player white
 	 */
-	private void initTeamOne() {
+	private void initTeamWhite() {
 		this.figuresTeamWhite = new ArrayList<IFigure>(LIST_SIZE);
 
 		this.figuresTeamWhite.add(this.figureFacotry.createKing(FOUR, ZERO, Team.white));
@@ -146,9 +165,9 @@ public class ChessController extends Observable implements IChessController {
 	}
 
 	/**
-	 * Initialize the list and fields for Player 2
+	 * Initialize the list and fields for player black
 	 */
-	private void initTeamTwo() {
+	private void initTeamBlack() {
 		this.figuresTeamBlack = new ArrayList<IFigure>(LIST_SIZE);
 
 		this.figuresTeamBlack.add(this.figureFacotry.createKing(FOUR, SEVEN, Team.black));
@@ -187,6 +206,84 @@ public class ChessController extends Observable implements IChessController {
 			this.figuresTeamBlack.add(this.figureFacotry.createPawn(i, SIX, Team.black, SIX));
 			this.fields[i][SIX] = this.fieldFactory.createField(true,
 					this.figuresTeamBlack.get(FIELD_SIZE + i));
+		}
+	}
+	
+	private void initTeamFromFieldsWhite(IFigure figure) {
+		FigureEnum figureEnum = FigureEnum.valueOf(figure.getClass()
+				.getSimpleName());
+
+		switch (figureEnum) {
+			case King:
+				this.figuresTeamWhite.add(this.figureFacotry.createKing(
+						figure.getxPos(), figure.getyPos(), Team.white));
+				break;
+			case Queen:
+				this.figuresTeamWhite.add(this.figureFacotry.createQueen(
+						figure.getxPos(), figure.getyPos(), Team.white));
+				break;
+			case Bishop:
+				this.figuresTeamWhite.add(this.figureFacotry.createBishop(
+						figure.getxPos(), figure.getyPos(), Team.white));
+				break;
+			case Knight:
+				this.figuresTeamWhite.add(this.figureFacotry.createKnight(
+						figure.getxPos(), figure.getyPos(), Team.white));
+				break;
+			case Rook:
+				this.figuresTeamWhite.add(this.figureFacotry.createRook(
+						figure.getxPos(), figure.getyPos(), Team.white));
+				break;
+			default:
+				this.figuresTeamWhite.add(this.figureFacotry.createPawn(
+						figure.getxPos(), figure.getyPos(), Team.white,
+						figure.getyPos()));
+				break;
+		}
+	}
+	
+	private void initTeamFromFields(IField fields[][]) {
+		for (int i = 0; i <= SEVEN; i++) {
+			for (int j = 0; j <= SEVEN; j++) {
+				IFigure figure = fields[i][j].getFigur();
+				if (figure != null && figure.getTeamNumber() == Team.white.ordinal()) {
+					initTeamFromFieldsWhite(figure);
+				} else if(figure != null && figure.getTeamNumber() == Team.black.ordinal()) {
+					initTeamFromFieldsBlack(figure);
+				}
+			}
+		}
+	}
+	
+	private void initTeamFromFieldsBlack(IFigure figure) {
+		FigureEnum figureEnum = FigureEnum.valueOf(figure.getClass().getSimpleName());
+		
+		switch (figureEnum) {
+			case King:
+				this.figuresTeamBlack.add(this.figureFacotry.createKing(
+						figure.getxPos(), figure.getyPos(), Team.black));
+				break;
+			case Queen:
+				this.figuresTeamBlack.add(this.figureFacotry.createQueen(
+						figure.getxPos(), figure.getyPos(), Team.black));
+				break;
+			case Bishop:
+				this.figuresTeamBlack.add(this.figureFacotry.createBishop(
+						figure.getxPos(), figure.getyPos(), Team.black));
+				break;
+			case Knight:
+				this.figuresTeamBlack.add(this.figureFacotry.createKnight(
+						figure.getxPos(), figure.getyPos(), Team.black));
+				break;
+			case Rook:
+				this.figuresTeamBlack.add(this.figureFacotry.createRook(
+						figure.getxPos(), figure.getyPos(), Team.black));
+				break;
+			default:
+				this.figuresTeamBlack.add(this.figureFacotry.createPawn(
+						figure.getxPos(), figure.getyPos(), Team.black,
+						figure.getyPos()));
+				break;
 		}
 	}
 
@@ -499,25 +596,6 @@ public class ChessController extends Observable implements IChessController {
 		notifyObservers();
 	}
 
-	@Override
-	public void restart() {
-		this.moveFigure = null;
-		this.possibleMoves = null;
-		this.select = false;
-		this.exchange = false;
-		this.gameover = false;
-		this.statusMessage = "Welcome to Chess";
-		this.turnMessage = "Team white's turn";
-		this.turn = 0;
-		this.turnsWhite = 0;
-		this.turnsBlack = 0;
-		initTeamOne();
-		initTeamTwo();
-		initFieldsRest();
-		this.checkmate.reset();
-		notifyObservers();
-	}
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public String toJson() {
@@ -566,13 +644,33 @@ public class ChessController extends Observable implements IChessController {
 		game.setTurnsBlack(this.turnsBlack);
 		game.setTurnsWhite(this.turnsWhite);
 		game.setFields(this.fields);
+		//TODO: continuing older game not always possible. 
+		//e.g.: play game, save it! load it, play it, save it, load one again fails! 
 		this.dao.saveGame(game);
 	}
-
+	
 	@Override
 	public void loadFromDB(String id) {
-		// TODO implement loading
-
+		ChessGame chessGame = this.dao.getGame(id);
+		this.fields = chessGame.getFields();
+		
+		this.possibleMoves = new ArrayList<>();
+		this.moveFigure = null;
+		this.select = false;
+		this.exchange = false;
+		this.gameover = false;
+		
+		this.turn = chessGame.getTurn();
+		this.turnsWhite = chessGame.getTurnsWhite();
+		this.turnsBlack = chessGame.getTurnsBlack();
+		
+		this.statusMessage = "Welcome to Chess";
+		String playerColorTurn = (chessGame.getTurn() == Team.white.ordinal()) ? Team.white.name() : Team.black.name(); 
+		this.turnMessage = "Team " + playerColorTurn + "'s turn";
+		
+		initTeamFromFields(chessGame.getFields());
+		this.checkmate.reset();
+		notifyObservers();
 	}
 
 	/**

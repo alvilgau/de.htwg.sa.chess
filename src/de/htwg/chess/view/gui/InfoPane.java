@@ -80,22 +80,39 @@ public class InfoPane extends JOptionPane {
 	/**
 	 * Loads game from database.
 	 */
-	public void handleLoadGame(JFrame frame, List<ChessGame> chessGames) {
+	public String handleLoadGame(JFrame frame, List<ChessGame> chessGames) {
 
+		// check if any games are available
 		if (chessGames.isEmpty()) {
 			JOptionPane.showMessageDialog(frame, "No saved games available.",
 					"No saved games available", JOptionPane.WARNING_MESSAGE);
-			return;
+			return null;
 		}
 		String nameList[] = new String[chessGames.size()];
-		for (int i = nameList.length - 1; i >= 0; i--) {
+		for (int i = 0; i < nameList.length; i++) {
 			ChessGame game = chessGames.get(i);
 			String dateTimeString = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 					.format(game.getSaveDate());
 			nameList[i] = game.getName() + " - Saved " + dateTimeString;
 		}
 
-		JOptionPane.showInputDialog(frame, "Pick a game to load", "Load game",
+		// display available games in database games.
+		Object selection = JOptionPane.showInputDialog(frame,
+				"Pick a game to load", "Load game",
 				JOptionPane.QUESTION_MESSAGE, null, nameList, null);
+
+		// there was a selection of the user. so check for the selection
+		if (selection != null) {
+			// now search for the chess games in List<ChessGame> chessGames
+			for (int i = 0; i < nameList.length; i++) {
+				if (nameList[i].equals(selection)) {
+					// return the UUID of the game
+					return chessGames.get(i).getId();
+				}
+			}
+		}
+
+		// somehow failed, so we return null.
+		return null;
 	}
 }
