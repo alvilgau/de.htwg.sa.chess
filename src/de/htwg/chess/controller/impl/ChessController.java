@@ -16,15 +16,10 @@ import de.htwg.chess.model.IFieldFactory;
 import de.htwg.chess.model.IFigure;
 import de.htwg.chess.model.IFigure.Team;
 import de.htwg.chess.model.IFigureFacotry;
-import de.htwg.chess.model.impl.Figure.FigureEnum;
 import de.htwg.chess.persistence.ChessGame;
 import de.htwg.chess.persistence.IChessDao;
 import de.htwg.util.observer.Observable;
 
-/**
- * @author Artur
- *
- */
 public class ChessController extends Observable implements IChessController {
 
 	public static final int ZERO = 0;
@@ -89,202 +84,123 @@ public class ChessController extends Observable implements IChessController {
 		this.dao = dao;
 		this.fields = new IField[FIELD_SIZE][FIELD_SIZE];
 		this.checkmate = new Checkmate();
-		
+
 		initNewGame();
 	}
 
 	@Override
 	public void restart() {
 		initNewGame();
-		
+
 		this.checkmate.reset();
 		notifyObservers();
 	}
-	
+
 	private void initNewGame() {
 		this.possibleMoves = new ArrayList<>();
 		this.moveFigure = null;
 		this.select = false;
 		this.exchange = false;
 		this.gameover = false;
-		
+
 		this.turn = 0;
 		this.turnsWhite = 0;
 		this.turnsBlack = 0;
-		
+
 		this.statusMessage = "Welcome to Chess";
 		this.turnMessage = "Team " + Team.white.name() + "'s turn";
-		
+
 		initTeamWhite();
 		initTeamBlack();
 		initFieldsRest();
+		initFigureList();
 	}
 
 	/**
-	 * Initialize the list and fields for player white
+	 * Initialize fields for player white
 	 */
 	private void initTeamWhite() {
-		this.figuresTeamWhite = new ArrayList<IFigure>(LIST_SIZE);
-
-		this.figuresTeamWhite.add(this.figureFacotry.createKing(FOUR, ZERO, Team.white));
-		this.fields[FOUR][ZERO] = this.fieldFactory.createField(true,
-				this.figuresTeamWhite.get(ZERO));
-
-		this.figuresTeamWhite.add(this.figureFacotry.createRook(ZERO, ZERO, Team.white));
 		this.fields[ZERO][ZERO] = this.fieldFactory.createField(true,
-				this.figuresTeamWhite.get(ONE));
+				this.figureFacotry.createRook(ZERO, ZERO, Team.white));
 
-		this.figuresTeamWhite.add(this.figureFacotry.createKnight(ONE, ZERO, Team.white));
-		this.fields[ONE][ZERO] = this.fieldFactory
-				.createField(true, this.figuresTeamWhite.get(TWO));
+		this.fields[ONE][ZERO] = this.fieldFactory.createField(true,
+				this.figureFacotry.createKnight(ONE, ZERO, Team.white));
 
-		this.figuresTeamWhite.add(this.figureFacotry.createBishop(TWO, ZERO, Team.white));
 		this.fields[TWO][ZERO] = this.fieldFactory.createField(true,
-				this.figuresTeamWhite.get(THREE));
+				this.figureFacotry.createBishop(TWO, ZERO, Team.white));
 
-		this.figuresTeamWhite.add(this.figureFacotry.createQueen(THREE, ZERO, Team.white));
 		this.fields[THREE][ZERO] = this.fieldFactory.createField(true,
-				this.figuresTeamWhite.get(FOUR));
+				this.figureFacotry.createQueen(THREE, ZERO, Team.white));
 
-		this.figuresTeamWhite.add(this.figureFacotry.createBishop(FIVE, ZERO, Team.white));
+		this.fields[FOUR][ZERO] = this.fieldFactory.createField(true,
+				this.figureFacotry.createKing(FOUR, ZERO, Team.white));
+
 		this.fields[FIVE][ZERO] = this.fieldFactory.createField(true,
-				this.figuresTeamWhite.get(FIVE));
+				this.figureFacotry.createBishop(FIVE, ZERO, Team.white));
 
-		this.figuresTeamWhite.add(this.figureFacotry.createKnight(SIX, ZERO, Team.white));
-		this.fields[SIX][ZERO] = this.fieldFactory
-				.createField(true, this.figuresTeamWhite.get(SIX));
+		this.fields[SIX][ZERO] = this.fieldFactory.createField(true,
+				this.figureFacotry.createKnight(SIX, ZERO, Team.white));
 
-		this.figuresTeamWhite.add(this.figureFacotry.createRook(SEVEN, ZERO, Team.white));
 		this.fields[SEVEN][ZERO] = this.fieldFactory.createField(true,
-				this.figuresTeamWhite.get(SEVEN));
+				this.figureFacotry.createRook(SEVEN, ZERO, Team.white));
 
 		for (int i = 0; i <= SEVEN; i++) {
-			this.figuresTeamWhite.add(this.figureFacotry.createPawn(i, ONE, Team.white, ONE));
 			this.fields[i][ONE] = this.fieldFactory.createField(true,
-					this.figuresTeamWhite.get(FIELD_SIZE + i));
+					this.figureFacotry.createPawn(i, ONE, Team.white, ONE));
 		}
 	}
 
 	/**
-	 * Initialize the list and fields for player black
+	 * Initialize fields for player black
 	 */
 	private void initTeamBlack() {
-		this.figuresTeamBlack = new ArrayList<IFigure>(LIST_SIZE);
-
-		this.figuresTeamBlack.add(this.figureFacotry.createKing(FOUR, SEVEN, Team.black));
-		this.fields[FOUR][SEVEN] = this.fieldFactory.createField(true,
-				this.figuresTeamBlack.get(ZERO));
-
-		this.figuresTeamBlack.add(this.figureFacotry.createRook(ZERO, SEVEN, Team.black));
 		this.fields[ZERO][SEVEN] = this.fieldFactory.createField(true,
-				this.figuresTeamBlack.get(ONE));
+				this.figureFacotry.createRook(ZERO, SEVEN, Team.black));
 
-		this.figuresTeamBlack.add(this.figureFacotry.createKnight(ONE, SEVEN, Team.black));
 		this.fields[ONE][SEVEN] = this.fieldFactory.createField(true,
-				this.figuresTeamBlack.get(TWO));
+				this.figureFacotry.createKnight(ONE, SEVEN, Team.black));
 
-		this.figuresTeamBlack.add(this.figureFacotry.createBishop(TWO, SEVEN, Team.black));
 		this.fields[TWO][SEVEN] = this.fieldFactory.createField(true,
-				this.figuresTeamBlack.get(THREE));
+				this.figureFacotry.createBishop(TWO, SEVEN, Team.black));
 
-		this.figuresTeamBlack.add(this.figureFacotry.createQueen(THREE, SEVEN, Team.black));
 		this.fields[THREE][SEVEN] = this.fieldFactory.createField(true,
-				this.figuresTeamBlack.get(FOUR));
+				this.figureFacotry.createQueen(THREE, SEVEN, Team.black));
 
-		this.figuresTeamBlack.add(this.figureFacotry.createBishop(FIVE, SEVEN, Team.black));
+		this.fields[FOUR][SEVEN] = this.fieldFactory.createField(true,
+				this.figureFacotry.createKing(FOUR, SEVEN, Team.black));
+
 		this.fields[FIVE][SEVEN] = this.fieldFactory.createField(true,
-				this.figuresTeamBlack.get(FIVE));
+				this.figureFacotry.createBishop(FIVE, SEVEN, Team.black));
 
-		this.figuresTeamBlack.add(this.figureFacotry.createKnight(SIX, SEVEN, Team.black));
 		this.fields[SIX][SEVEN] = this.fieldFactory.createField(true,
-				this.figuresTeamBlack.get(SIX));
+				this.figureFacotry.createKnight(SIX, SEVEN, Team.black));
 
-		this.figuresTeamBlack.add(this.figureFacotry.createRook(SEVEN, SEVEN, Team.black));
 		this.fields[SEVEN][SEVEN] = this.fieldFactory.createField(true,
-				this.figuresTeamBlack.get(SEVEN));
+				this.figureFacotry.createRook(SEVEN, SEVEN, Team.black));
 
 		for (int i = 0; i <= SEVEN; i++) {
-			this.figuresTeamBlack.add(this.figureFacotry.createPawn(i, SIX, Team.black, SIX));
 			this.fields[i][SIX] = this.fieldFactory.createField(true,
-					this.figuresTeamBlack.get(FIELD_SIZE + i));
+					this.figureFacotry.createPawn(i, SIX, Team.black, SIX));
 		}
 	}
-	
-	private void initTeamFromFieldsWhite(IFigure figure) {
-		FigureEnum figureEnum = FigureEnum.valueOf(figure.getClass()
-				.getSimpleName());
 
-		switch (figureEnum) {
-			case King:
-				this.figuresTeamWhite.add(this.figureFacotry.createKing(
-						figure.getxPos(), figure.getyPos(), Team.white));
-				break;
-			case Queen:
-				this.figuresTeamWhite.add(this.figureFacotry.createQueen(
-						figure.getxPos(), figure.getyPos(), Team.white));
-				break;
-			case Bishop:
-				this.figuresTeamWhite.add(this.figureFacotry.createBishop(
-						figure.getxPos(), figure.getyPos(), Team.white));
-				break;
-			case Knight:
-				this.figuresTeamWhite.add(this.figureFacotry.createKnight(
-						figure.getxPos(), figure.getyPos(), Team.white));
-				break;
-			case Rook:
-				this.figuresTeamWhite.add(this.figureFacotry.createRook(
-						figure.getxPos(), figure.getyPos(), Team.white));
-				break;
-			default:
-				this.figuresTeamWhite.add(this.figureFacotry.createPawn(
-						figure.getxPos(), figure.getyPos(), Team.white,
-						figure.getyPos()));
-				break;
-		}
-	}
-	
-	private void initTeamFromFields(IField fields[][]) {
-		for (int i = 0; i <= SEVEN; i++) {
-			for (int j = 0; j <= SEVEN; j++) {
-				IFigure figure = fields[i][j].getFigur();
-				if (figure != null && figure.getTeamNumber() == Team.white.ordinal()) {
-					initTeamFromFieldsWhite(figure);
-				} else if(figure != null && figure.getTeamNumber() == Team.black.ordinal()) {
-					initTeamFromFieldsBlack(figure);
+	/**
+	 * Initialize the figure lists with the fields
+	 */
+	private void initFigureList() {
+		this.figuresTeamWhite = new ArrayList<IFigure>(LIST_SIZE);
+		this.figuresTeamBlack = new ArrayList<IFigure>(LIST_SIZE);
+		for (int i = 0; i < FIELD_SIZE; i++) {
+			for (int j = 0; j < FIELD_SIZE; j++) {
+				IFigure figure = this.fields[i][j].getFigur();
+				if (figure != null) {
+					if (figure.getTeamNumber() == Team.white.ordinal()) {
+						this.figuresTeamWhite.add(figure);
+					} else {
+						this.figuresTeamBlack.add(figure);
+					}
 				}
 			}
-		}
-	}
-	
-	private void initTeamFromFieldsBlack(IFigure figure) {
-		FigureEnum figureEnum = FigureEnum.valueOf(figure.getClass().getSimpleName());
-		
-		switch (figureEnum) {
-			case King:
-				this.figuresTeamBlack.add(this.figureFacotry.createKing(
-						figure.getxPos(), figure.getyPos(), Team.black));
-				break;
-			case Queen:
-				this.figuresTeamBlack.add(this.figureFacotry.createQueen(
-						figure.getxPos(), figure.getyPos(), Team.black));
-				break;
-			case Bishop:
-				this.figuresTeamBlack.add(this.figureFacotry.createBishop(
-						figure.getxPos(), figure.getyPos(), Team.black));
-				break;
-			case Knight:
-				this.figuresTeamBlack.add(this.figureFacotry.createKnight(
-						figure.getxPos(), figure.getyPos(), Team.black));
-				break;
-			case Rook:
-				this.figuresTeamBlack.add(this.figureFacotry.createRook(
-						figure.getxPos(), figure.getyPos(), Team.black));
-				break;
-			default:
-				this.figuresTeamBlack.add(this.figureFacotry.createPawn(
-						figure.getxPos(), figure.getyPos(), Team.black,
-						figure.getyPos()));
-				break;
 		}
 	}
 
@@ -411,6 +327,11 @@ public class ChessController extends Observable implements IChessController {
 	@Override
 	public int getTurnsBlack() {
 		return this.turnsBlack;
+	}
+
+	@Override
+	public final IChessDao getDao() {
+		return this.dao;
 	}
 
 	@Override
@@ -645,41 +566,32 @@ public class ChessController extends Observable implements IChessController {
 		game.setTurnsBlack(this.turnsBlack);
 		game.setTurnsWhite(this.turnsWhite);
 		game.setFields(this.fields);
-		//TODO: continuing older game not always possible. 
-		//e.g.: play game, save it! load it, play it, save it, load one again fails! 
 		this.dao.saveGame(game);
 	}
-	
+
 	@Override
 	public void loadFromDB(String id) {
 		ChessGame chessGame = this.dao.getGame(id);
-		this.fields = null;
+
 		this.fields = chessGame.getFields();
-		
-		this.possibleMoves = new ArrayList<>();
+		this.possibleMoves.clear();
+		this.checkmate.reset();
 		this.moveFigure = null;
 		this.select = false;
-		this.exchange = false;
-		this.gameover = false;
-		
+
 		this.turn = chessGame.getTurn();
 		this.turnsWhite = chessGame.getTurnsWhite();
 		this.turnsBlack = chessGame.getTurnsBlack();
-		
-		String dateTimeString = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(chessGame.getSaveDate());
-		this.statusMessage = "Loaded game " + chessGame.getName() + " - " + dateTimeString;
-		String playerColorTurn = (chessGame.getTurn() == Team.white.ordinal()) ? Team.white.name() : Team.black.name(); 
-		this.turnMessage = "Team " + playerColorTurn + "'s turn";
-		
-		initTeamFromFields(this.fields);
-		this.checkmate.reset();
-		notifyObservers();
-	}
 
-	/**
-	 * @return the dao
-	 */
-	public final IChessDao getDao() {
-		return dao;
+		String dateTimeString = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(chessGame
+				.getSaveDate());
+		this.statusMessage = "Loaded game " + chessGame.getName() + " - " + dateTimeString;
+		String playerColorTurn = (chessGame.getTurn() == Team.white.ordinal()) ? Team.white.name()
+				: Team.black.name();
+		this.turnMessage = "Team " + playerColorTurn + "'s turn";
+
+		initFigureList();
+		updateCheckmate();
+		notifyObservers();
 	}
 }

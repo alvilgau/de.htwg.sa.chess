@@ -10,7 +10,7 @@ import org.junit.Test;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-import de.htwg.chess.ChessModule;
+import de.htwg.chess.ChessModuleTest;
 import de.htwg.chess.controller.IChessController;
 import de.htwg.chess.controller.impl.Checkmate.CheckMate;
 
@@ -21,7 +21,7 @@ public class CheckmateTest {
 
 	@Before
 	public void setUp() {
-		this.injector = Guice.createInjector(new ChessModule());
+		this.injector = Guice.createInjector(new ChessModuleTest());
 		this.controller = this.injector.getInstance(IChessController.class);
 	}
 

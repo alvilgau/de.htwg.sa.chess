@@ -91,8 +91,7 @@ public class Checkmate {
 	 * @param fields
 	 *            - the current playground
 	 */
-	public void update(List<IFigure> teamWhite, List<IFigure> teamBlack,
-			IField fields[][]) {
+	public void update(List<IFigure> teamWhite, List<IFigure> teamBlack, IField fields[][]) {
 		updateTeamWhite(teamWhite, teamBlack, fields);
 		updateTeamBlack(teamWhite, teamBlack, fields);
 	}
@@ -107,10 +106,11 @@ public class Checkmate {
 	 * @param fields
 	 *            - the current playground
 	 */
-	private void updateTeamWhite(List<IFigure> teamWhite,
-			List<IFigure> teamBlack, IField fields[][]) {
-		int xPos = teamWhite.get(0).getxPos();
-		int yPos = teamWhite.get(0).getyPos();
+	private void updateTeamWhite(List<IFigure> teamWhite, List<IFigure> teamBlack,
+			IField fields[][]) {
+		IFigure king = findKing(teamWhite);
+		int xPos = king.getxPos();
+		int yPos = king.getyPos();
 		boolean updated = false;
 
 		for (IFigure fig : teamBlack) {
@@ -136,10 +136,11 @@ public class Checkmate {
 	 * @param fields
 	 *            - the current playground
 	 */
-	private void updateTeamBlack(List<IFigure> teamWhite,
-			List<IFigure> teamBlack, IField fields[][]) {
-		int xPos = teamBlack.get(0).getxPos();
-		int yPos = teamBlack.get(0).getyPos();
+	private void updateTeamBlack(List<IFigure> teamWhite, List<IFigure> teamBlack,
+			IField fields[][]) {
+		IFigure king = findKing(teamBlack);
+		int xPos = king.getxPos();
+		int yPos = king.getyPos();
 		boolean updated = false;
 
 		for (IFigure fig : teamWhite) {
@@ -153,6 +154,18 @@ public class Checkmate {
 		if (!updated) {
 			this.checkmateBlack = CheckMate.save;
 		}
+	}
+
+	/**
+	 * Gets the king figure from a list of figures
+	 */
+	private IFigure findKing(List<IFigure> figures) {
+		for (IFigure figure : figures) {
+			if (figure.isKing()) {
+				return figure;
+			}
+		}
+		return null;
 	}
 
 	/**

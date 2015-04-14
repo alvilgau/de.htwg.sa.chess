@@ -49,6 +49,11 @@ public interface IFigure {
 	boolean move(int x, int y);
 
 	/**
+	 * @return true if the figure is a king
+	 */
+	boolean isKing();
+
+	/**
 	 * This method calculates all possible moves
 	 * 
 	 * @param fields

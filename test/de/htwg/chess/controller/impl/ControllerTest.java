@@ -10,7 +10,7 @@ import org.junit.Test;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-import de.htwg.chess.ChessModule;
+import de.htwg.chess.ChessModuleTest;
 import de.htwg.chess.controller.IChessController;
 import de.htwg.chess.model.impl.Bishop;
 import de.htwg.chess.model.impl.Knight;
@@ -25,7 +25,7 @@ public class ControllerTest {
 
 	@Before
 	public void setUp() {
-		this.injector = Guice.createInjector(new ChessModule());
+		this.injector = Guice.createInjector(new ChessModuleTest());
 		this.controller = (ChessController) this.injector.getInstance(IChessController.class);
 	}
 
@@ -268,5 +268,22 @@ public class ControllerTest {
 		int[][] possMoves = this.controller.getPossibleMoves();
 		assertEquals(possMoves[0][0], 0);
 		assertEquals(possMoves[0][1], 2);
+	}
+
+	@Test
+	public void testDB() {
+		assertEquals(this.controller.getDao().getAllGames().size(), 0);
+		this.controller.saveToDB("test");
+		assertEquals(this.controller.getDao().getAllGames().size(), 1);
+
+		this.controller.setGameover(true);
+		this.controller.saveToDB("test2");
+		assertEquals(this.controller.getDao().getAllGames().size(), 1);
+
+		this.controller.select(0, 1);
+		this.controller.move(0, 2);
+		assertEquals(this.controller.getTurnsWhite(), 1);
+		this.controller.loadFromDB(this.controller.getDao().getAllGames().get(0).getId());
+		assertEquals(this.controller.getTurnsWhite(), 0);
 	}
 }

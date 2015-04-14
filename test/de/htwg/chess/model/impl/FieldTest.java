@@ -9,10 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.htwg.chess.model.IFigure.Team;
-import de.htwg.chess.model.impl.Bishop;
-import de.htwg.chess.model.impl.Field;
-import de.htwg.chess.model.impl.King;
-import de.htwg.chess.model.impl.Pawn;
 
 public class FieldTest {
 
@@ -53,13 +49,6 @@ public class FieldTest {
 	public void testToString() {
 		assertEquals("L", this.feld2.toString());
 		assertEquals("-", this.feld.toString());
-	}
-
-	@Test
-	public void testIsKing() {
-		assertFalse(this.feld2.isKing());
-		this.feld2.setFigur(new King(0, 5, Team.black));
-		assertTrue(this.feld2.isKing());
 	}
 
 	@Test

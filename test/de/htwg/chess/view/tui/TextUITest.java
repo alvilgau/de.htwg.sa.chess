@@ -10,10 +10,9 @@ import org.junit.Test;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-import de.htwg.chess.ChessModule;
+import de.htwg.chess.ChessModuleTest;
 import de.htwg.chess.controller.IChessController;
 import de.htwg.chess.controller.impl.ChessController;
-import de.htwg.chess.view.tui.TextUI;
 
 public class TextUITest {
 
@@ -24,7 +23,7 @@ public class TextUITest {
 	@Before
 	public void setUp() {
 		PropertyConfigurator.configure("log4j.properties");
-		this.injector = Guice.createInjector(new ChessModule());
+		this.injector = Guice.createInjector(new ChessModuleTest());
 		this.controller = (ChessController) this.injector.getInstance(IChessController.class);
 		this.tui = this.injector.getInstance(TextUI.class);
 	}

@@ -20,11 +20,6 @@ import de.htwg.util.observer.IObserver;
 
 public class ChessFrame extends JFrame implements IObserver {
 
-	/**
-	 * TODO: Loading game (Dialog mit Anzeige der gespeicherten Spiele als
-	 * Tabelle)
-	 */
-
 	private static final long serialVersionUID = 1L;
 
 	private IChessController controller;
@@ -70,21 +65,20 @@ public class ChessFrame extends JFrame implements IObserver {
 				ChessFrame.this.infoPane.handleSaveGame(ChessFrame.this);
 			}
 		});
-		
+
 		gameMenu.add(saveMenuItem);
-		
+
 		loadMenuItem = new JMenuItem("Load Game");
 		loadMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String idOfSelectedGame = ChessFrame.this.infoPane
-						.handleLoadGame(ChessFrame.this, controller.getDao()
-								.getAllGames());
-				if(idOfSelectedGame != null) {
+				String idOfSelectedGame = ChessFrame.this.infoPane.handleLoadGame(ChessFrame.this,
+						controller.getDao().getAllGames());
+				if (idOfSelectedGame != null) {
 					controller.loadFromDB(idOfSelectedGame);
 				}
 			}
-			
+
 		});
 		gameMenu.add(loadMenuItem);
 

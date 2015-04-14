@@ -55,12 +55,12 @@ public class Field implements IField {
 
 	@Override
 	public boolean isSet() {
-		return set;
+		return this.set;
 	}
 
 	@Override
 	public Figure getFigur() {
-		return figur;
+		return this.figur;
 	}
 
 	@Override
@@ -70,30 +70,25 @@ public class Field implements IField {
 
 	@Override
 	public int getxPos() {
-		return xPos;
+		return this.xPos;
 	}
 
 	@Override
 	public int getyPos() {
-		return yPos;
-	}
-
-	@Override
-	public boolean isKing() {
-		return figur.toString().equals("K");
+		return this.yPos;
 	}
 
 	@Override
 	public void clear() {
-		set = false;
-		figur = null;
+		this.set = false;
+		this.figur = null;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		if (set) {
-			sb.append(figur.toString());
+		if (this.set) {
+			sb.append(this.figur.toString());
 		} else {
 			sb.append("-");
 		}

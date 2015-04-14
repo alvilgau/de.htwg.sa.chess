@@ -6,8 +6,8 @@ import de.htwg.chess.model.IField;
 
 public class King extends Figure {
 
-	private static final int[][] MOVES = { { -1, 0 }, { -1, 1 }, { -1, -1 },
-			{ 0, 1 }, { 0, -1 }, { 1, 0 }, { 1, 1 }, { 1, -1 } };
+	private static final int[][] MOVES = { { -1, 0 }, { -1, 1 }, { -1, -1 }, { 0, 1 }, { 0, -1 },
+			{ 1, 0 }, { 1, 1 }, { 1, -1 } };
 
 	/**
 	 * Constructs a new King object
@@ -27,7 +27,12 @@ public class King extends Figure {
 
 	@Override
 	public List<IField> getPossibleMoves(IField[][] fields) {
-		return moveValidator.simpleMoveValidation(this, fields, MOVES);
+		return this.moveValidator.simpleMoveValidation(this, fields, MOVES);
+	}
+
+	@Override
+	public boolean isKing() {
+		return true;
 	}
 
 	@Override

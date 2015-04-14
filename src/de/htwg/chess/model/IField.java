@@ -43,13 +43,6 @@ public interface IField {
 	int getyPos();
 
 	/**
-	 * Checks the figure at the field
-	 * 
-	 * @return true if the figure is a king
-	 */
-	boolean isKing();
-
-	/**
 	 * Sets the attributes of a field to a default value
 	 */
 	void clear();
