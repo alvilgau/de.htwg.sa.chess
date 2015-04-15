@@ -46,13 +46,13 @@ public class KingTest {
 		// Collision with figure of same team
 		assertTrue(this.koenig.getPossibleMoves(this.field).contains(this.field[1][1]));
 		this.field[1][1].setSet(true);
-		this.field[1][1].setFigur(new Queen(2, 1, Team.white));
+		this.field[1][1].setFigure(new Queen(2, 1, Team.white));
 		assertFalse(this.koenig.getPossibleMoves(this.field).contains(this.field[1][1]));
 
 		// Kill collision
 		assertTrue(this.koenig.getPossibleMoves(this.field).contains(this.field[0][1]));
 		this.field[0][1].setSet(true);
-		this.field[0][1].setFigur(new Queen(0, 1, Team.black));
+		this.field[0][1].setFigure(new Queen(0, 1, Team.black));
 		assertTrue(this.koenig.getPossibleMoves(this.field).contains(this.field[0][1]));
 	}
 

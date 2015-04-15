@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import de.htwg.chess.controller.IChessController;
-import de.htwg.chess.persistence.ChessGame;
+import de.htwg.chess.model.IChessGame;
 
 public class InfoPane extends JOptionPane {
 
@@ -80,7 +80,7 @@ public class InfoPane extends JOptionPane {
 	/**
 	 * Loads game from database.
 	 */
-	public String handleLoadGame(JFrame frame, List<ChessGame> chessGames) {
+	public String handleLoadGame(JFrame frame, List<IChessGame> chessGames) {
 
 		// check if any games are available
 		if (chessGames.isEmpty()) {
@@ -90,7 +90,7 @@ public class InfoPane extends JOptionPane {
 		}
 		String nameList[] = new String[chessGames.size()];
 		for (int i = 0; i < nameList.length; i++) {
-			ChessGame game = chessGames.get(i);
+			IChessGame game = chessGames.get(i);
 			String dateTimeString = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 					.format(game.getSaveDate());
 			nameList[i] = game.getName() + " - Saved " + dateTimeString;

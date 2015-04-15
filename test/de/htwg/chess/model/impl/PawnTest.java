@@ -59,15 +59,15 @@ public class PawnTest {
 
 	@Test
 	public void testPossibleMoves() {
-		this.field[1][1].setFigur(this.bauer);
+		this.field[1][1].setFigure(this.bauer);
 		this.field[1][1].setSet(true);
-		this.field[2][2].setFigur(this.bauer2);
+		this.field[2][2].setFigure(this.bauer2);
 		this.field[2][2].setSet(true);
-		this.field[0][2].setFigur(new Pawn(0, 2, Team.white, 1));
+		this.field[0][2].setFigure(new Pawn(0, 2, Team.white, 1));
 		this.field[0][2].setSet(true);
-		this.field[0][7].setFigur(this.bauer3);
+		this.field[0][7].setFigure(this.bauer3);
 		this.field[0][7].setSet(true);
-		this.field[1][6].setFigur(this.bauer4);
+		this.field[1][6].setFigure(this.bauer4);
 		this.field[1][6].setSet(true);
 
 		List<IField> possibleMoves = this.bauer.getPossibleMoves(this.field);

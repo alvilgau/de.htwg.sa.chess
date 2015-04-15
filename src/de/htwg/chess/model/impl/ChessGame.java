@@ -1,11 +1,12 @@
-package de.htwg.chess.persistence;
+package de.htwg.chess.model.impl;
 
 import java.util.Date;
 import java.util.UUID;
 
+import de.htwg.chess.model.IChessGame;
 import de.htwg.chess.model.IField;
 
-public class ChessGame {
+public class ChessGame implements IChessGame {
 
 	private String id;
 
@@ -41,9 +42,6 @@ public class ChessGame {
 		this.name = name;
 	}
 	
-	/**
-	 * @return the saved
-	 */
 	public Date getSaveDate() {
 		return this.saveDate;
 	}

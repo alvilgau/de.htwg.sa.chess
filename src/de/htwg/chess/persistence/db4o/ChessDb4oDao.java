@@ -6,7 +6,8 @@ import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.query.Query;
 
-import de.htwg.chess.persistence.ChessGame;
+import de.htwg.chess.model.IChessGame;
+import de.htwg.chess.model.impl.ChessGame;
 import de.htwg.chess.persistence.IChessDao;
 
 public class ChessDb4oDao implements IChessDao {
@@ -18,12 +19,12 @@ public class ChessDb4oDao implements IChessDao {
 	}
 
 	@Override
-	public void saveGame(ChessGame game) {
+	public void saveGame(IChessGame game) {
 		this.db.store(game);
 	}
 
 	@Override
-	public ChessGame getGame(String id) {
+	public IChessGame getGame(String id) {
 		this.db.close();
 		this.db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "chess.data");
 		Query query = this.db.query();
@@ -44,7 +45,7 @@ public class ChessDb4oDao implements IChessDao {
 
 	@Override
 	public boolean deleteGame(String id) {
-		ChessGame game = getGame(id);
+		IChessGame game = getGame(id);
 		if (game != null) {
 			this.db.delete(game);
 			return true;
@@ -53,8 +54,8 @@ public class ChessDb4oDao implements IChessDao {
 	}
 
 	@Override
-	public List<ChessGame> getAllGames() {
-		return this.db.query(ChessGame.class);
+	public List<IChessGame> getAllGames() {
+		return this.db.query(IChessGame.class);
 	}
 
 }

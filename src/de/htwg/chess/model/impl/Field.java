@@ -59,12 +59,12 @@ public class Field implements IField {
 	}
 
 	@Override
-	public Figure getFigur() {
+	public Figure getFigure() {
 		return this.figur;
 	}
 
 	@Override
-	public void setFigur(IFigure figure) {
+	public void setFigure(IFigure figure) {
 		this.figur = (Figure) figure;
 	}
 

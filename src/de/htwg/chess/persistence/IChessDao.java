@@ -2,6 +2,8 @@ package de.htwg.chess.persistence;
 
 import java.util.List;
 
+import de.htwg.chess.model.IChessGame;
+
 public interface IChessDao {
 
 	/**
@@ -10,7 +12,7 @@ public interface IChessDao {
 	 * @param game
 	 *            to save
 	 */
-	void saveGame(ChessGame game);
+	void saveGame(IChessGame game);
 
 	/**
 	 * Loads a game from the database
@@ -19,7 +21,7 @@ public interface IChessDao {
 	 *            of the chess game that should be loaded
 	 * @return corresponding game from the database
 	 */
-	ChessGame getGame(String id);
+	IChessGame getGame(String id);
 
 	/**
 	 * Checks a game is in the database or not
@@ -44,5 +46,5 @@ public interface IChessDao {
 	 * 
 	 * @return {@link List} with all games
 	 */
-	List<ChessGame> getAllGames();
+	List<IChessGame> getAllGames();
 }

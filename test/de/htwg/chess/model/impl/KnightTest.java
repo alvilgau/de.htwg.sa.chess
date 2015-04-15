@@ -46,13 +46,13 @@ public class KnightTest {
 		// Collision with figure of the same team
 		assertTrue(this.springer.getPossibleMoves(this.field).contains(this.field[3][4]));
 		this.field[3][4].setSet(true);
-		this.field[3][4].setFigur(new Bishop(3, 4, Team.white));
+		this.field[3][4].setFigure(new Bishop(3, 4, Team.white));
 		assertFalse(this.springer.getPossibleMoves(this.field).contains(this.field[3][4]));
 
 		// Kill collision
 		assertTrue(this.springer.getPossibleMoves(this.field).contains(this.field[0][5]));
 		this.field[0][5].setSet(true);
-		this.field[0][5].setFigur(new Bishop(3, 4, Team.black));
+		this.field[0][5].setFigure(new Bishop(3, 4, Team.black));
 		assertTrue(this.springer.getPossibleMoves(this.field).contains(this.field[0][5]));
 	}
 

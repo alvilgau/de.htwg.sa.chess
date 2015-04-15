@@ -59,7 +59,7 @@ public class Pawn extends Figure {
 			List<IField> possibleMoves) {
 		IField field = getNeighbour(dX, dY, fields);
 		if (field != null && field.isSet()
-				&& field.getFigur().getTeamNumber() != getTeamNumber()) {
+				&& field.getFigure().getTeamNumber() != getTeamNumber()) {
 			possibleMoves.add(field);
 		}
 	}

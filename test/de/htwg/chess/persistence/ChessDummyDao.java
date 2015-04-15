@@ -3,22 +3,24 @@ package de.htwg.chess.persistence;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.htwg.chess.model.IChessGame;
+
 public class ChessDummyDao implements IChessDao {
 
-	private List<ChessGame> games;
+	private List<IChessGame> games;
 
 	public ChessDummyDao() {
 		this.games = new ArrayList<>();
 	}
 
 	@Override
-	public void saveGame(ChessGame game) {
+	public void saveGame(IChessGame game) {
 		this.games.add(game);
 	}
 
 	@Override
-	public ChessGame getGame(String id) {
-		for (ChessGame game : this.games) {
+	public IChessGame getGame(String id) {
+		for (IChessGame game : this.games) {
 			if (game.getId().equals(id)) {
 				return game;
 			}
@@ -33,7 +35,7 @@ public class ChessDummyDao implements IChessDao {
 
 	@Override
 	public boolean deleteGame(String id) {
-		ChessGame game = getGame(id);
+		IChessGame game = getGame(id);
 		if (game != null) {
 			this.games.remove(game);
 			return true;
@@ -42,7 +44,7 @@ public class ChessDummyDao implements IChessDao {
 	}
 
 	@Override
-	public List<ChessGame> getAllGames() {
+	public List<IChessGame> getAllGames() {
 		return this.games;
 	}
 

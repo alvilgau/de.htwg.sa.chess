@@ -7,7 +7,7 @@ public interface IField {
 	 * 
 	 * @return the figure of a field
 	 */
-	IFigure getFigur();
+	IFigure getFigure();
 
 	/**
 	 * References the field with a new figure
@@ -15,7 +15,7 @@ public interface IField {
 	 * @param figure
 	 *            - the new figure
 	 */
-	void setFigur(IFigure figure);
+	void setFigure(IFigure figure);
 
 	/**
 	 * Getter for set

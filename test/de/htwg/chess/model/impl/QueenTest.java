@@ -50,49 +50,49 @@ public class QueenTest {
 		// Check Collision moving up
 		assertTrue(this.dame.getPossibleMoves(this.field).contains(this.field[1][5]));
 		this.field[1][5].setSet(true);
-		this.field[1][5].setFigur(new Bishop(1, 5, Team.black));
+		this.field[1][5].setFigure(new Bishop(1, 5, Team.black));
 		assertFalse(this.dame.getPossibleMoves(this.field).contains(this.field[1][5]));
 
 		// Check Collision moving down
 		assertTrue(this.dame.getPossibleMoves(this.field).contains(this.field[1][3]));
 		this.field[1][3].setSet(true);
-		this.field[1][3].setFigur(new Bishop(1, 3, Team.black));
+		this.field[1][3].setFigure(new Bishop(1, 3, Team.black));
 		assertFalse(this.dame.getPossibleMoves(this.field).contains(this.field[1][3]));
 
 		// Check Collision moving right
 		assertTrue(this.dame.getPossibleMoves(this.field).contains(this.field[2][4]));
 		this.field[2][4].setSet(true);
-		this.field[2][4].setFigur(new Bishop(2, 4, Team.black));
+		this.field[2][4].setFigure(new Bishop(2, 4, Team.black));
 		assertFalse(this.dame.getPossibleMoves(this.field).contains(this.field[2][4]));
 
 		// Check Collision moving left
 		assertTrue(this.dame.getPossibleMoves(this.field).contains(this.field[0][4]));
 		this.field[0][4].setSet(true);
-		this.field[0][4].setFigur(new Bishop(0, 4, Team.black));
+		this.field[0][4].setFigure(new Bishop(0, 4, Team.black));
 		assertFalse(this.dame.getPossibleMoves(this.field).contains(this.field[0][4]));
 
 		// Check collision moving up left
 		assertTrue(this.dame.getPossibleMoves(this.field).contains(this.field[0][5]));
 		this.field[0][5].setSet(true);
-		this.field[0][5].setFigur(new Bishop(0, 5, Team.black));
+		this.field[0][5].setFigure(new Bishop(0, 5, Team.black));
 		assertFalse(this.dame.getPossibleMoves(this.field).contains(this.field[0][5]));
 
 		// Check collision moving up right
 		assertTrue(this.dame.getPossibleMoves(this.field).contains(this.field[2][5]));
 		this.field[2][5].setSet(true);
-		this.field[2][5].setFigur(new Bishop(2, 5, Team.black));
+		this.field[2][5].setFigure(new Bishop(2, 5, Team.black));
 		assertFalse(this.dame.getPossibleMoves(this.field).contains(this.field[2][5]));
 
 		// Check collision moving down left
 		assertTrue(this.dame.getPossibleMoves(this.field).contains(this.field[0][3]));
 		this.field[0][3].setSet(true);
-		this.field[0][3].setFigur(new Bishop(0, 3, Team.black));
+		this.field[0][3].setFigure(new Bishop(0, 3, Team.black));
 		assertFalse(this.dame.getPossibleMoves(this.field).contains(this.field[0][3]));
 
 		// Check collision moving down right
 		assertTrue(this.dame.getPossibleMoves(this.field).contains(this.field[2][3]));
 		this.field[2][3].setSet(true);
-		this.field[2][3].setFigur(new Bishop(2, 3, Team.black));
+		this.field[2][3].setFigure(new Bishop(2, 3, Team.black));
 		assertFalse(this.dame.getPossibleMoves(this.field).contains(this.field[2][3]));
 	}
 

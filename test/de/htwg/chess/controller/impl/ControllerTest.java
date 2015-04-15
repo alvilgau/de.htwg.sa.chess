@@ -106,23 +106,23 @@ public class ControllerTest {
 		this.controller.select(0, 1);
 		this.controller.move(0, 3);
 		this.controller.select(0, 6);
-		assertTrue(this.controller.getFields()[0][6].getFigur() instanceof Pawn);
+		assertTrue(this.controller.getFields()[0][6].getFigure() instanceof Pawn);
 
 		// Exchange with Knight
 		this.controller.exchangeKnight();
-		assertTrue(this.controller.getFields()[0][6].getFigur() instanceof Knight);
+		assertTrue(this.controller.getFields()[0][6].getFigure() instanceof Knight);
 
 		// Exchange with Bishop
 		this.controller.exchangeBishop();
-		assertTrue(this.controller.getFields()[0][6].getFigur() instanceof Bishop);
+		assertTrue(this.controller.getFields()[0][6].getFigure() instanceof Bishop);
 
 		// Exchange with Rook
 		this.controller.exchangeRook();
-		assertTrue(this.controller.getFields()[0][6].getFigur() instanceof Rook);
+		assertTrue(this.controller.getFields()[0][6].getFigure() instanceof Rook);
 
 		// Exchange with Queen
 		this.controller.exchangeQueen();
-		assertTrue(this.controller.getFields()[0][6].getFigur() instanceof Queen);
+		assertTrue(this.controller.getFields()[0][6].getFigure() instanceof Queen);
 	}
 
 	@Test

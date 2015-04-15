@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import de.htwg.chess.persistence.ChessGame;
+import de.htwg.chess.model.impl.ChessGame;
 import de.htwg.chess.persistence.IChessDao;
 
 public class ChessDb4oDaoTest {

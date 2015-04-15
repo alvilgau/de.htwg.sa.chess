@@ -23,7 +23,7 @@ public final class MoveValidator {
 			List<IField> possibleMoves) {
 		if (field != null) {
 			if (field.isSet()) {
-				if (field.getFigur().getTeamNumber() != fig.getTeamNumber()) {
+				if (field.getFigure().getTeamNumber() != fig.getTeamNumber()) {
 					possibleMoves.add(field);
 				}
 				return true;

@@ -25,8 +25,8 @@ public class FieldTest {
 
 	@Test
 	public void testPosition() {
-		assertEquals(this.feld2.getxPos(), this.feld2.getFigur().getxPos());
-		assertEquals(this.feld2.getyPos(), this.feld2.getFigur().getyPos());
+		assertEquals(this.feld2.getxPos(), this.feld2.getFigure().getxPos());
+		assertEquals(this.feld2.getyPos(), this.feld2.getFigure().getyPos());
 		assertEquals(this.feld3.getxPos(), 1);
 	}
 
@@ -40,9 +40,9 @@ public class FieldTest {
 
 	@Test
 	public void testGetFigur() {
-		this.feld.setFigur(new Pawn(5, 4, Team.white, 1));
-		assertNotNull(this.feld.getFigur());
-		assertNotNull(this.feld2.getFigur());
+		this.feld.setFigure(new Pawn(5, 4, Team.white, 1));
+		assertNotNull(this.feld.getFigure());
+		assertNotNull(this.feld2.getFigure());
 	}
 
 	@Test

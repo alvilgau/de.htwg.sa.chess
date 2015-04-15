@@ -50,25 +50,25 @@ public class RookTest {
 		// Collision moving up
 		assertTrue(this.turm.getPossibleMoves(this.field).contains(this.field[1][4]));
 		this.field[1][4].setSet(true);
-		this.field[1][4].setFigur(new Bishop(1, 4, Team.white));
+		this.field[1][4].setFigure(new Bishop(1, 4, Team.white));
 		assertFalse(this.turm.getPossibleMoves(this.field).contains(this.field[1][4]));
 
 		// Collision moving down
 		assertTrue(this.turm.getPossibleMoves(this.field).contains(this.field[1][0]));
 		this.field[1][0].setSet(true);
-		this.field[1][0].setFigur(new Bishop(1, 0, Team.white));
+		this.field[1][0].setFigure(new Bishop(1, 0, Team.white));
 		assertFalse(this.turm.getPossibleMoves(this.field).contains(this.field[1][0]));
 
 		// Collision moving right
 		assertTrue(this.turm.getPossibleMoves(this.field).contains(this.field[2][2]));
 		this.field[2][2].setSet(true);
-		this.field[2][2].setFigur(new Bishop(2, 2, Team.white));
+		this.field[2][2].setFigure(new Bishop(2, 2, Team.white));
 		assertFalse(this.turm.getPossibleMoves(this.field).contains(this.field[2][2]));
 
 		// Collision moving left
 		assertTrue(this.turm.getPossibleMoves(this.field).contains(this.field[0][2]));
 		this.field[0][2].setSet(true);
-		this.field[0][2].setFigur(new Bishop(0, 2, Team.white));
+		this.field[0][2].setFigure(new Bishop(0, 2, Team.white));
 		assertFalse(this.turm.getPossibleMoves(this.field).contains(this.field[0][2]));
 	}
 

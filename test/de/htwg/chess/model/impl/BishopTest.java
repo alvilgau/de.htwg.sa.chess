@@ -54,25 +54,25 @@ public class BishopTest {
 		// Check collision moving up left
 		assertTrue(this.laeufer.getPossibleMoves(this.field).contains(this.field[0][5]));
 		this.field[0][5].setSet(true);
-		this.field[0][5].setFigur(new Bishop(0, 5, Team.white));
+		this.field[0][5].setFigure(new Bishop(0, 5, Team.white));
 		assertFalse(this.laeufer.getPossibleMoves(this.field).contains(this.field[0][5]));
 
 		// Check collision moving up right
 		assertTrue(this.laeufer.getPossibleMoves(this.field).contains(this.field[2][5]));
 		this.field[2][5].setSet(true);
-		this.field[2][5].setFigur(new Bishop(2, 5, Team.white));
+		this.field[2][5].setFigure(new Bishop(2, 5, Team.white));
 		assertFalse(this.laeufer.getPossibleMoves(this.field).contains(this.field[2][5]));
 
 		// Check collision moving down left
 		assertTrue(this.laeufer.getPossibleMoves(this.field).contains(this.field[0][3]));
 		this.field[0][3].setSet(true);
-		this.field[0][3].setFigur(new Bishop(0, 3, Team.white));
+		this.field[0][3].setFigure(new Bishop(0, 3, Team.white));
 		assertFalse(this.laeufer.getPossibleMoves(this.field).contains(this.field[0][3]));
 
 		// Check collision moving down right
 		assertTrue(this.laeufer.getPossibleMoves(this.field).contains(this.field[2][3]));
 		this.field[2][3].setSet(true);
-		this.field[2][3].setFigur(new Bishop(2, 3, Team.white));
+		this.field[2][3].setFigure(new Bishop(2, 3, Team.white));
 		assertFalse(this.laeufer.getPossibleMoves(this.field).contains(this.field[2][3]));
 	}
 
