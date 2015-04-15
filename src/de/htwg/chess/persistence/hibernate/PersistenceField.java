@@ -2,8 +2,8 @@ package de.htwg.chess.persistence.hibernate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -15,15 +15,15 @@ public class PersistenceField {
 	@Column(name = "id")
 	private String id;
 
+	@Column(name = "isset")
 	private Boolean set;
 	private int xPos;
 	private int yPos;
 	private int figure;
 	private int team;
 
-	@ManyToOne
-	@JoinColumn(name = "id")
-	private PersistenceChessGame gameId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	private PersistenceChessGame chessgame;
 
 	/**
 	 * @return the id
@@ -56,18 +56,17 @@ public class PersistenceField {
 	}
 
 	/**
-	 * @return the gameId
+	 * @return the chessgame
 	 */
-	public PersistenceChessGame getField() {
-		return gameId;
+	public PersistenceChessGame getChessgame() {
+		return chessgame;
 	}
 
 	/**
-	 * @param gameId
-	 *            the gameId to set
+	 * @param chessgame the chessgame to set
 	 */
-	public void setField(PersistenceChessGame gameId) {
-		this.gameId = gameId;
+	public void setChessgame(PersistenceChessGame chessgame) {
+		this.chessgame = chessgame;
 	}
 
 	/**

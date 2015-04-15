@@ -7,6 +7,9 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import de.htwg.chess.persistence.hibernate.PersistenceChessGame;
+import de.htwg.chess.persistence.hibernate.PersistenceField;
+
 public class HibernateUtil {
 
 	// XML based configuration
@@ -44,7 +47,7 @@ public class HibernateUtil {
 		try {
 			// Create the SessionFactory from hibernate.cfg.xml
 			Configuration configuration = new Configuration();
-			configuration.configure("hibernate-annotation.cfg.xml");
+			configuration.configure("/hibernate-annotation.cfg.xml");
 			System.out.println("Hibernate Annotation Configuration loaded");
 
 			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
@@ -81,7 +84,8 @@ public class HibernateUtil {
 			// we can set mapping file or class with annotation
 			// addClass(Employee1.class) will look for resource
 			// com/journaldev/hibernate/model/Employee1.hbm.xml (not good)
-			//configuration.addAnnotatedClass(Employee1.class);
+			configuration.addAnnotatedClass(PersistenceChessGame.class);
+			configuration.addAnnotatedClass(PersistenceField.class);
 
 			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 					.applySettings(configuration.getProperties()).build();

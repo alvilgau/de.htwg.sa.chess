@@ -27,7 +27,7 @@
 		<property name="hibernate.hbm2ddl.auto">create</property>
 
 		<!-- mapping file, we can use Bean annotations too -->
-		<mapping resource="de.htwg.chess.persistence.hibernate.PersistenceChessGame" />
-		<mapping resource="de.htwg.chess.persistence.hibernate.PersistenceField" />
+		<mapping class="de.htwg.chess.persistence.hibernate.PersistenceChessGame" />
+		<mapping class="de.htwg.chess.persistence.hibernate.PersistenceField" />
 	</session-factory>
 </hibernate-configuration>

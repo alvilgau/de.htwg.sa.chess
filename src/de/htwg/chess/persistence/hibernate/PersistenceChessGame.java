@@ -1,7 +1,8 @@
 package de.htwg.chess.persistence.hibernate;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -25,8 +26,8 @@ public class PersistenceChessGame {
 
 	private int turnsBlack;
 
-	@OneToMany(mappedBy = "gameId")
-	private List<PersistenceField> fields;
+	@OneToMany(mappedBy = "chessgame", cascade = CascadeType.ALL)
+	private Collection<PersistenceField> fields;
 
 	private String name;
 
@@ -108,7 +109,7 @@ public class PersistenceChessGame {
 	/**
 	 * @return the fields
 	 */
-	public List<PersistenceField> getFields() {
+	public Collection<PersistenceField> getFields() {
 		return fields;
 	}
 
@@ -116,7 +117,7 @@ public class PersistenceChessGame {
 	 * @param fields
 	 *            the fields to set
 	 */
-	public void setFields(List<PersistenceField> fields) {
+	public void setFields(Collection<PersistenceField> fields) {
 		this.fields = fields;
 	}
 	
