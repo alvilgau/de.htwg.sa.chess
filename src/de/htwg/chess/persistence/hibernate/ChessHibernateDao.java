@@ -8,19 +8,22 @@ import de.htwg.chess.model.IChessGame;
 import de.htwg.chess.model.impl.ChessGame;
 import de.htwg.chess.persistence.IChessDao;
 import de.htwg.chess.persistence.hibernate.util.HibernateUtil;
+import de.htwg.chess.persistence.hibernate.util.transform.ChessGameToPersistenceObjectUtil;
 
 public class ChessHibernateDao implements IChessDao {
 	
 	private Session session;
 	
 	public ChessHibernateDao() {
-		session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session = HibernateUtil.getSessionJavaConfigFactory().getCurrentSession();
 	}
 
 	@Override
-	public void saveGame(IChessGame game) {
+	public void saveGame(IChessGame chessGame) {
+		PersistenceChessGame persistenceChessGame = ChessGameToPersistenceObjectUtil.transform(chessGame);
+		
 		session.beginTransaction();
-		session.save(game);
+		session.save(persistenceChessGame);
 		session.getTransaction().commit();
 	}
 
