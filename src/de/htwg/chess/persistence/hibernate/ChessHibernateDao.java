@@ -15,7 +15,7 @@ public class ChessHibernateDao implements IChessDao {
 	private Session session;
 	
 	public ChessHibernateDao() {
-		session = HibernateUtil.getSessionJavaConfigFactory().getCurrentSession();
+		session = HibernateUtil.getSessionAnnotationFactory().getCurrentSession();
 	}
 
 	@Override
