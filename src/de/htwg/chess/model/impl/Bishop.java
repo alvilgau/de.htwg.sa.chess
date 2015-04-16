@@ -2,6 +2,7 @@ package de.htwg.chess.model.impl;
 
 import java.util.List;
 
+import de.htwg.chess.model.FigureType;
 import de.htwg.chess.model.IField;
 
 public class Bishop extends Figure {
@@ -20,11 +21,12 @@ public class Bishop extends Figure {
 		setyPos(y);
 		setxPos(x);
 		setTeam(team);
+		setFigureType(FigureType.Bishop);
 	}
 
 	@Override
 	public List<IField> getPossibleMoves(IField[][] fields) {
-		return moveValidator.diagonalMoveValidation(this, fields);
+		return this.moveValidator.diagonalMoveValidation(this, fields);
 	}
 
 	@Override

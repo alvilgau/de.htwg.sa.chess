@@ -7,8 +7,8 @@
 		<!-- Database connection properties - Driver, URL, user, password -->
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/chess?createDatabaseIfNotExist=true</property>
-		<property name="hibernate.connection.username">chess</property>
-		<property name="hibernate.connection.password">chess</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password"></property>
 
 		<!-- Connection Pool Size -->
 		<property name="hibernate.connection.pool_size">1</property>

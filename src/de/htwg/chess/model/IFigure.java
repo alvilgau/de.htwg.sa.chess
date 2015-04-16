@@ -37,6 +37,11 @@ public interface IFigure {
 	String getTeam();
 
 	/**
+	 * Gets the figure type of a figure (for example Pawn)
+	 */
+	FigureType getFigureType();
+
+	/**
 	 * Moves a figure
 	 * 
 	 * @param x
@@ -61,4 +66,5 @@ public interface IFigure {
 	 * @return a list of all possible moves for the figure
 	 */
 	List<IField> getPossibleMoves(IField[][] fields);
+
 }

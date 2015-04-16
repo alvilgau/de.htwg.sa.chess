@@ -15,117 +15,73 @@ public class PersistenceField {
 	@Column(name = "id")
 	private String id;
 
-	@Column(name = "isset")
+	@Column(name = "isSet")
 	private Boolean set;
-	private int xPos;
-	private int yPos;
-	private int figure;
-	private int team;
+
+	private Integer xPos;
+
+	private Integer yPos;
+
+	private Integer figure;
+
+	private Integer team;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private PersistenceChessGame chessgame;
 
-	/**
-	 * @return the id
-	 */
 	public String getId() {
-		return id;
+		return this.id;
 	}
 
-	/**
-	 * @param id
-	 *            the id to set
-	 */
 	public void setId(String id) {
 		this.id = id;
 	}
 
-	/**
-	 * @return the set
-	 */
 	public Boolean getSet() {
-		return set;
+		return this.set;
 	}
 
-	/**
-	 * @param set
-	 *            the set to set
-	 */
 	public void setSet(Boolean set) {
 		this.set = set;
 	}
 
-	/**
-	 * @return the chessgame
-	 */
-	public PersistenceChessGame getChessgame() {
-		return chessgame;
+	public Integer getxPos() {
+		return this.xPos;
 	}
 
-	/**
-	 * @param chessgame the chessgame to set
-	 */
-	public void setChessgame(PersistenceChessGame chessgame) {
-		this.chessgame = chessgame;
-	}
-
-	/**
-	 * @return the xPos
-	 */
-	public int getxPos() {
-		return xPos;
-	}
-
-	/**
-	 * @param xPos
-	 *            the xPos to set
-	 */
-	public void setxPos(int xPos) {
+	public void setxPos(Integer xPos) {
 		this.xPos = xPos;
 	}
 
-	/**
-	 * @return the yPos
-	 */
-	public int getyPos() {
-		return yPos;
+	public Integer getyPos() {
+		return this.yPos;
 	}
 
-	/**
-	 * @param yPos
-	 *            the yPos to set
-	 */
-	public void setyPos(int yPos) {
+	public void setyPos(Integer yPos) {
 		this.yPos = yPos;
 	}
 
-	/**
-	 * @return the figure
-	 */
-	public int getFigure() {
-		return figure;
+	public Integer getFigure() {
+		return this.figure;
 	}
 
-	/**
-	 * @param figure
-	 *            the figure to set
-	 */
-	public void setFigure(int figure) {
+	public void setFigure(Integer figure) {
 		this.figure = figure;
 	}
 
-	/**
-	 * @return the team
-	 */
-	public int getTeam() {
-		return team;
+	public Integer getTeam() {
+		return this.team;
 	}
 
-	/**
-	 * @param team
-	 *            the team to set
-	 */
-	public void setTeam(int team) {
+	public void setTeam(Integer team) {
 		this.team = team;
+	}
+
+	public PersistenceChessGame getChessgame() {
+		return this.chessgame;
+	}
+
+	public void setChessgame(PersistenceChessGame chessgame) {
+		this.chessgame = chessgame;
 	}
 }

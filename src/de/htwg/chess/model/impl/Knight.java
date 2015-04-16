@@ -2,12 +2,13 @@ package de.htwg.chess.model.impl;
 
 import java.util.List;
 
+import de.htwg.chess.model.FigureType;
 import de.htwg.chess.model.IField;
 
 public class Knight extends Figure {
 
-	private static final int[][] MOVES = { { -2, 1 }, { -1, 2 }, { 1, 2 },
-			{ 2, 1 }, { 2, -1 }, { 1, -2 }, { -1, -2 }, { -2, -1 } };
+	private static final int[][] MOVES = { { -2, 1 }, { -1, 2 }, { 1, 2 }, { 2, 1 }, { 2, -1 },
+			{ 1, -2 }, { -1, -2 }, { -2, -1 } };
 
 	/**
 	 * Constructs a new Knight object
@@ -23,11 +24,12 @@ public class Knight extends Figure {
 		setxPos(x);
 		setyPos(y);
 		setTeam(team);
+		setFigureType(FigureType.Knight);
 	}
 
 	@Override
 	public List<IField> getPossibleMoves(IField[][] fields) {
-		return moveValidator.simpleMoveValidation(this, fields, MOVES);
+		return this.moveValidator.simpleMoveValidation(this, fields, MOVES);
 	}
 
 	@Override

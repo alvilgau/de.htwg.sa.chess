@@ -2,6 +2,7 @@ package de.htwg.chess.model.impl;
 
 import java.util.List;
 
+import de.htwg.chess.model.FigureType;
 import de.htwg.chess.model.IField;
 
 public class King extends Figure {
@@ -23,6 +24,7 @@ public class King extends Figure {
 		setyPos(y);
 		setxPos(x);
 		setTeam(team);
+		setFigureType(FigureType.King);
 	}
 
 	@Override

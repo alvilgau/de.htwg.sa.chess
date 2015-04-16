@@ -1,14 +1,15 @@
 package de.htwg.chess.persistence.hibernate;
+
 import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 
 @Entity
 @Table(name = "game")
@@ -18,6 +19,8 @@ public class PersistenceChessGame {
 	@Column(name = "id")
 	private String id;
 
+	private String name;
+
 	private Date saveDate;
 
 	private int turn;
@@ -26,107 +29,63 @@ public class PersistenceChessGame {
 
 	private int turnsBlack;
 
-	@OneToMany(mappedBy = "chessgame", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "chessgame", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Collection<PersistenceField> fields;
 
-	private String name;
-
-	/**
-	 * @return the id
-	 */
 	public String getId() {
-		return id;
+		return this.id;
 	}
 
-	/**
-	 * @param id
-	 *            the id to set
-	 */
 	public void setId(String id) {
 		this.id = id;
 	}
 
-	/**
-	 * @return the saveDate
-	 */
-	public Date getSaveDate() {
-		return saveDate;
-	}
-
-	/**
-	 * @param saveDate
-	 *            the saveDate to set
-	 */
-	public void setSaveDate(Date saveDate) {
-		this.saveDate = saveDate;
-	}
-
-	/**
-	 * @return the turn
-	 */
-	public int getTurn() {
-		return turn;
-	}
-
-	/**
-	 * @param turn
-	 *            the turn to set
-	 */
-	public void setTurn(int turn) {
-		this.turn = turn;
-	}
-
-	/**
-	 * @return the turnsWhite
-	 */
-	public int getTurnsWhite() {
-		return turnsWhite;
-	}
-
-	/**
-	 * @param turnsWhite
-	 *            the turnsWhite to set
-	 */
-	public void setTurnsWhite(int turnsWhite) {
-		this.turnsWhite = turnsWhite;
-	}
-
-	/**
-	 * @return the turnsBlack
-	 */
-	public int getTurnsBlack() {
-		return turnsBlack;
-	}
-
-	/**
-	 * @param turnsBlack
-	 *            the turnsBlack to set
-	 */
-	public void setTurnsBlack(int turnsBlack) {
-		this.turnsBlack = turnsBlack;
-	}
-
-	/**
-	 * @return the fields
-	 */
-	public Collection<PersistenceField> getFields() {
-		return fields;
-	}
-
-	/**
-	 * @param fields
-	 *            the fields to set
-	 */
-	public void setFields(Collection<PersistenceField> fields) {
-		this.fields = fields;
-	}
-	
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Date getSaveDate() {
+		return this.saveDate;
+	}
+
+	public void setSaveDate(Date saveDate) {
+		this.saveDate = saveDate;
+	}
+
+	public int getTurn() {
+		return this.turn;
+	}
+
+	public void setTurn(int turn) {
+		this.turn = turn;
+	}
+
+	public int getTurnsWhite() {
+		return this.turnsWhite;
+	}
+
+	public void setTurnsWhite(int turnsWhite) {
+		this.turnsWhite = turnsWhite;
+	}
+
+	public int getTurnsBlack() {
+		return this.turnsBlack;
+	}
+
+	public void setTurnsBlack(int turnsBlack) {
+		this.turnsBlack = turnsBlack;
+	}
+
+	public Collection<PersistenceField> getFields() {
+		return this.fields;
+	}
+
+	public void setFields(Collection<PersistenceField> fields) {
+		this.fields = fields;
 	}
 
 }

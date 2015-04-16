@@ -1,6 +1,6 @@
 package de.htwg.chess.model;
 
-public enum FigureEnum {
+public enum FigureType {
 
 	Pawn, Rook, Knight, Bishop, Queen, King
 }

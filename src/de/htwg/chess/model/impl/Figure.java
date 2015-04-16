@@ -1,5 +1,6 @@
 package de.htwg.chess.model.impl;
 
+import de.htwg.chess.model.FigureType;
 import de.htwg.chess.model.IField;
 import de.htwg.chess.model.IFigure;
 
@@ -13,6 +14,7 @@ public abstract class Figure implements IFigure {
 	private int xPos;
 	private int yPos;
 	private Team team;
+	private FigureType figureType;
 
 	@Override
 	public int getxPos() {
@@ -62,6 +64,21 @@ public abstract class Figure implements IFigure {
 	@Override
 	public int getTeamNumber() {
 		return this.team.ordinal();
+	}
+
+	@Override
+	public FigureType getFigureType() {
+		return this.figureType;
+	}
+
+	/**
+	 * Sets the figure type of a figure
+	 * 
+	 * @param figureType
+	 *            - the new figure type
+	 */
+	public void setFigureType(FigureType figureType) {
+		this.figureType = figureType;
 	}
 
 	@Override

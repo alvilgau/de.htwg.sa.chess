@@ -2,6 +2,7 @@ package de.htwg.chess.model.impl;
 
 import java.util.List;
 
+import de.htwg.chess.model.FigureType;
 import de.htwg.chess.model.IField;
 
 public class Rook extends Figure {
@@ -20,14 +21,13 @@ public class Rook extends Figure {
 		setxPos(x);
 		setyPos(y);
 		setTeam(team);
+		setFigureType(FigureType.Rook);
 	}
 
 	@Override
 	public List<IField> getPossibleMoves(IField[][] fields) {
-		List<IField> possibleMoves = moveValidator.horizontalMoveValidation(
-				this, fields);
-		possibleMoves
-				.addAll(moveValidator.verticalMoveValidation(this, fields));
+		List<IField> possibleMoves = this.moveValidator.horizontalMoveValidation(this, fields);
+		possibleMoves.addAll(this.moveValidator.verticalMoveValidation(this, fields));
 		return possibleMoves;
 	}
 

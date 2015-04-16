@@ -4,7 +4,7 @@ import de.htwg.chess.model.IChessGame;
 import de.htwg.chess.model.impl.ChessGame;
 import de.htwg.chess.persistence.hibernate.PersistenceChessGame;
 
-public class PersitenceObjectToChessGameUtil {
+public class PersistenceObjectToChessGameUtil {
 
 	public static IChessGame transform(PersistenceChessGame persistenceChessGame) {
 		
@@ -14,8 +14,8 @@ public class PersitenceObjectToChessGameUtil {
 		chessGame.setSaveDate(persistenceChessGame.getSaveDate());
 		chessGame.setTurn(persistenceChessGame.getTurn());
 		chessGame.setTurnsBlack(persistenceChessGame.getTurnsBlack());
-		chessGame.setTurnsWhite(chessGame.getTurnsWhite());
-		chessGame.setFields(PersitenceObjectToFieldUtil.transform(persistenceChessGame.getFields()));
+		chessGame.setTurnsWhite(persistenceChessGame.getTurnsWhite());
+		chessGame.setFields(PersistenceObjectToFieldUtil.transform(persistenceChessGame.getFields()));
 		
 		return chessGame;
 	}

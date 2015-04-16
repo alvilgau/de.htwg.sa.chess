@@ -3,6 +3,7 @@ package de.htwg.chess.model.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.htwg.chess.model.FigureType;
 import de.htwg.chess.model.IField;
 
 public class Pawn extends Figure {
@@ -25,6 +26,7 @@ public class Pawn extends Figure {
 		setxPos(x);
 		setyPos(y);
 		setTeam(team);
+		setFigureType(FigureType.Pawn);
 		this.startPosY = startPosY;
 	}
 
@@ -39,7 +41,7 @@ public class Pawn extends Figure {
 			possibleMoves.add(field);
 
 			/* Move 2 fields forward */
-			if (getyPos() == startPosY) {
+			if (getyPos() == this.startPosY) {
 				int dY2 = getTeamNumber() == Team.white.ordinal() ? 2 : -2;
 				field = getNeighbour(0, dY2, fields);
 				if (field != null && !field.isSet()) {
@@ -55,11 +57,9 @@ public class Pawn extends Figure {
 		return possibleMoves;
 	}
 
-	private void possibleKill(int dX, int dY, IField[][] fields,
-			List<IField> possibleMoves) {
+	private void possibleKill(int dX, int dY, IField[][] fields, List<IField> possibleMoves) {
 		IField field = getNeighbour(dX, dY, fields);
-		if (field != null && field.isSet()
-				&& field.getFigure().getTeamNumber() != getTeamNumber()) {
+		if (field != null && field.isSet() && field.getFigure().getTeamNumber() != getTeamNumber()) {
 			possibleMoves.add(field);
 		}
 	}

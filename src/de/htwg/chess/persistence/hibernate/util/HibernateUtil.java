@@ -1,122 +1,22 @@
 package de.htwg.chess.persistence.hibernate.util;
 
-import java.util.Properties;
-
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-
-import de.htwg.chess.persistence.hibernate.PersistenceChessGame;
-import de.htwg.chess.persistence.hibernate.PersistenceField;
+import org.hibernate.cfg.AnnotationConfiguration;
 
 public class HibernateUtil {
 
-	// XML based configuration
-	private static SessionFactory sessionFactory;
+	private static final SessionFactory SESSION_FACTORY;
 
-	// Annotation based configuration
-	private static SessionFactory sessionAnnotationFactory;
-
-	// Property based configuration
-	private static SessionFactory sessionJavaConfigFactory;
-
-	private static SessionFactory buildSessionFactory() {
-		try {
-			// Create the SessionFactory from hibernate.cfg.xml
-			Configuration configuration = new Configuration();
-			configuration.configure("hibernate.cfg.xml");
-			System.out.println("Hibernate Configuration loaded");
-
-			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-					.applySettings(configuration.getProperties()).build();
-			System.out.println("Hibernate serviceRegistry created");
-
-			SessionFactory sessionFactory = configuration
-					.buildSessionFactory(serviceRegistry);
-
-			return sessionFactory;
-		} catch (Throwable ex) {
-			// Make sure you log the exception, as it might be swallowed
-			System.err.println("Initial SessionFactory creation failed." + ex);
-			throw new ExceptionInInitializerError(ex);
-		}
+	static {
+		final AnnotationConfiguration cfg = new AnnotationConfiguration();
+		cfg.configure("/hibernate.cfg.xml");
+		SESSION_FACTORY = cfg.buildSessionFactory();
 	}
 
-	private static SessionFactory buildSessionAnnotationFactory() {
-		try {
-			// Create the SessionFactory from hibernate.cfg.xml
-			Configuration configuration = new Configuration();
-			configuration.configure("/hibernate-annotation.cfg.xml");
-			System.out.println("Hibernate Annotation Configuration loaded");
-
-			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-					.applySettings(configuration.getProperties()).build();
-			System.out.println("Hibernate Annotation serviceRegistry created");
-
-			SessionFactory sessionFactory = configuration
-					.buildSessionFactory(serviceRegistry);
-
-			return sessionFactory;
-		} catch (Throwable ex) {
-			// Make sure you log the exception, as it might be swallowed
-			System.err.println("Initial SessionFactory creation failed." + ex);
-			throw new ExceptionInInitializerError(ex);
-		}
-	}
-
-	private static SessionFactory buildSessionJavaConfigFactory() {
-		try {
-			Configuration configuration = new Configuration();
-
-			// Create Properties, can be read from property files too
-			Properties props = new Properties();
-			props.put("hibernate.connection.driver_class",
-					"com.mysql.jdbc.Driver");
-			props.put("hibernate.connection.url",
-					"jdbc:mysql://localhost/chess");
-			props.put("hibernate.connection.username", "chess");
-			props.put("hibernate.connection.password", "chess");
-			props.put("hibernate.current_session_context_class", "thread");
-
-			configuration.setProperties(props);
-
-			// we can set mapping file or class with annotation
-			// addClass(Employee1.class) will look for resource
-			// com/journaldev/hibernate/model/Employee1.hbm.xml (not good)
-			configuration.addAnnotatedClass(PersistenceChessGame.class);
-			configuration.addAnnotatedClass(PersistenceField.class);
-
-			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-					.applySettings(configuration.getProperties()).build();
-			System.out.println("Hibernate Java Config serviceRegistry created");
-
-			SessionFactory sessionFactory = configuration
-					.buildSessionFactory(serviceRegistry);
-
-			return sessionFactory;
-		} catch (Throwable ex) {
-			System.err.println("Initial SessionFactory creation failed." + ex);
-			throw new ExceptionInInitializerError(ex);
-		}
+	private HibernateUtil() {
 	}
 
 	public static SessionFactory getSessionFactory() {
-		if (sessionFactory == null)
-			sessionFactory = buildSessionFactory();
-		return sessionFactory;
+		return SESSION_FACTORY;
 	}
-
-	public static SessionFactory getSessionAnnotationFactory() {
-		if (sessionAnnotationFactory == null)
-			sessionAnnotationFactory = buildSessionAnnotationFactory();
-		return sessionAnnotationFactory;
-	}
-
-	public static SessionFactory getSessionJavaConfigFactory() {
-		if (sessionJavaConfigFactory == null)
-			sessionJavaConfigFactory = buildSessionJavaConfigFactory();
-		return sessionJavaConfigFactory;
-	}
-
 }
