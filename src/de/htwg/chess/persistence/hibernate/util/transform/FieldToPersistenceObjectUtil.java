@@ -24,6 +24,7 @@ public class FieldToPersistenceObjectUtil {
 		}
 		PersistenceField persistenceField = new PersistenceField();
 
+		persistenceField.setSet(field.isSet());
 		persistenceField.setTeam(field.getFigure().getTeamNumber());
 		persistenceField.setxPos(field.getxPos());
 		persistenceField.setyPos(field.getyPos());
@@ -45,7 +46,7 @@ public class FieldToPersistenceObjectUtil {
 		}
 		persistenceField.setFigure(figure);
 
-		String id = chessGame.getId() + "-" + field.getxPos() + field.getyPos();
+		String id = chessGame.getId() + "-" + field.getxPos() + "-" + field.getyPos();
 		persistenceField.setId(id);
 
 		return persistenceField;
@@ -61,9 +62,5 @@ public class FieldToPersistenceObjectUtil {
 			}
 		}		
 		return transformedFields;
-		
 	}
-	
-	
-	
 }

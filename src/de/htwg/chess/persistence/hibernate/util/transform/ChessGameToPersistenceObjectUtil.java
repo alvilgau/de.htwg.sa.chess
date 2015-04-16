@@ -9,6 +9,9 @@ public class ChessGameToPersistenceObjectUtil {
 		
 		PersistenceChessGame persistenceChessGame = new PersistenceChessGame();
 		persistenceChessGame.setId(chessGame.getId());
+		persistenceChessGame.setTurn(chessGame.getTurn());
+		persistenceChessGame.setTurnsBlack(chessGame.getTurnsBlack());
+		persistenceChessGame.setTurnsWhite(chessGame.getTurnsWhite());
 		persistenceChessGame.setName(chessGame.getName());
 		persistenceChessGame.setSaveDate(chessGame.getSaveDate());
 		persistenceChessGame.setFields(FieldToPersistenceObjectUtil.transform(chessGame.getFields(), chessGame));
