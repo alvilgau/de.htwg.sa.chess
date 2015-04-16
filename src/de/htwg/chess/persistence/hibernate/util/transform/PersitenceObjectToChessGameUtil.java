@@ -15,7 +15,7 @@ public class PersitenceObjectToChessGameUtil {
 		chessGame.setTurn(persistenceChessGame.getTurn());
 		chessGame.setTurnsBlack(persistenceChessGame.getTurnsBlack());
 		chessGame.setTurnsWhite(chessGame.getTurnsWhite());
-		chessGame.setFields(null);
+		chessGame.setFields(PersitenceObjectToFieldUtil.transform(persistenceChessGame.getFields()));
 		
 		return chessGame;
 	}

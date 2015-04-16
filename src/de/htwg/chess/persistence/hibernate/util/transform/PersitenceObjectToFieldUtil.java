@@ -1,6 +1,6 @@
 package de.htwg.chess.persistence.hibernate.util.transform;
 
-import java.util.List;
+import java.util.Collection;
 
 import de.htwg.chess.controller.impl.ChessController;
 import de.htwg.chess.model.FigureEnum;
@@ -49,7 +49,7 @@ public class PersitenceObjectToFieldUtil {
 		return field;
 	}
 	
-	public static IField[][] transform(List<PersistenceField> persistenceFields) {
+	public static IField[][] transform(Collection<PersistenceField> persistenceFields) {
 		
 		IField[][] fields = new IField[ChessController.FIELD_SIZE][ChessController.FIELD_SIZE];
 		
