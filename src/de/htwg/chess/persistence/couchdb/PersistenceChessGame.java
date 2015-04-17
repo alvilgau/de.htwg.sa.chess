@@ -1,25 +1,20 @@
-package de.htwg.chess.persistence.hibernate;
+package de.htwg.chess.persistence.couchdb;
 
 import java.util.Collection;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import org.ektorp.support.CouchDbDocument;
 
 import de.htwg.chess.persistence.IPersistenceChessGame;
 import de.htwg.chess.persistence.IPersistenceField;
 
-@Entity
-@Table(name = "game")
-public class PersistenceChessGame implements IPersistenceChessGame {
+public class PersistenceChessGame extends CouchDbDocument implements IPersistenceChessGame {
 
-	@Id
-	@Column(name = "id")
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2521164001857616783L;
+
 	private String id;
 
 	private String name;
@@ -32,11 +27,10 @@ public class PersistenceChessGame implements IPersistenceChessGame {
 
 	private int turnsBlack;
 
-	@OneToMany(mappedBy = "chessgame", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = PersistenceField.class)
 	private Collection<IPersistenceField> fields;
 
 	public String getId() {
-		return this.id;
+		return id;
 	}
 
 	public void setId(String id) {
@@ -44,7 +38,7 @@ public class PersistenceChessGame implements IPersistenceChessGame {
 	}
 
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	public void setName(String name) {
@@ -52,7 +46,7 @@ public class PersistenceChessGame implements IPersistenceChessGame {
 	}
 
 	public Date getSaveDate() {
-		return this.saveDate;
+		return saveDate;
 	}
 
 	public void setSaveDate(Date saveDate) {
@@ -60,7 +54,7 @@ public class PersistenceChessGame implements IPersistenceChessGame {
 	}
 
 	public int getTurn() {
-		return this.turn;
+		return turn;
 	}
 
 	public void setTurn(int turn) {
@@ -68,7 +62,7 @@ public class PersistenceChessGame implements IPersistenceChessGame {
 	}
 
 	public int getTurnsWhite() {
-		return this.turnsWhite;
+		return turnsWhite;
 	}
 
 	public void setTurnsWhite(int turnsWhite) {
@@ -76,7 +70,7 @@ public class PersistenceChessGame implements IPersistenceChessGame {
 	}
 
 	public int getTurnsBlack() {
-		return this.turnsBlack;
+		return turnsBlack;
 	}
 
 	public void setTurnsBlack(int turnsBlack) {
@@ -84,11 +78,10 @@ public class PersistenceChessGame implements IPersistenceChessGame {
 	}
 
 	public Collection<IPersistenceField> getFields() {
-		return this.fields;
+		return fields;
 	}
 
 	public void setFields(Collection<IPersistenceField> fields) {
 		this.fields = fields;
 	}
-
 }

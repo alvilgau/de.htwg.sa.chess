@@ -1,24 +1,19 @@
-package de.htwg.chess.persistence.hibernate;
+package de.htwg.chess.persistence.couchdb;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import org.ektorp.support.CouchDbDocument;
 
 import de.htwg.chess.persistence.IPersistenceChessGame;
 import de.htwg.chess.persistence.IPersistenceField;
 
-@Entity
-@Table(name = "field")
-public class PersistenceField implements IPersistenceField{
+public class PersistenceField extends CouchDbDocument implements IPersistenceField {
 
-	@Id
-	@Column(name = "id")
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8020935469601114063L;
+
 	private String id;
 
-	@Column(name = "isSet")
 	private Boolean set;
 
 	private Integer xPos;
@@ -29,11 +24,10 @@ public class PersistenceField implements IPersistenceField{
 
 	private Integer team;
 
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = PersistenceChessGame.class)
 	private IPersistenceChessGame chessgame;
 
 	public String getId() {
-		return this.id;
+		return id;
 	}
 
 	public void setId(String id) {
@@ -41,7 +35,7 @@ public class PersistenceField implements IPersistenceField{
 	}
 
 	public Boolean getSet() {
-		return this.set;
+		return set;
 	}
 
 	public void setSet(Boolean set) {
@@ -49,7 +43,7 @@ public class PersistenceField implements IPersistenceField{
 	}
 
 	public Integer getxPos() {
-		return this.xPos;
+		return xPos;
 	}
 
 	public void setxPos(Integer xPos) {
@@ -57,7 +51,7 @@ public class PersistenceField implements IPersistenceField{
 	}
 
 	public Integer getyPos() {
-		return this.yPos;
+		return yPos;
 	}
 
 	public void setyPos(Integer yPos) {
@@ -65,7 +59,7 @@ public class PersistenceField implements IPersistenceField{
 	}
 
 	public Integer getFigure() {
-		return this.figure;
+		return figure;
 	}
 
 	public void setFigure(Integer figure) {
@@ -73,7 +67,7 @@ public class PersistenceField implements IPersistenceField{
 	}
 
 	public Integer getTeam() {
-		return this.team;
+		return team;
 	}
 
 	public void setTeam(Integer team) {
@@ -81,7 +75,7 @@ public class PersistenceField implements IPersistenceField{
 	}
 
 	public IPersistenceChessGame getChessgame() {
-		return this.chessgame;
+		return chessgame;
 	}
 
 	public void setChessgame(IPersistenceChessGame chessgame) {

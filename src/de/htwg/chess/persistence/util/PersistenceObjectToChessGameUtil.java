@@ -1,12 +1,12 @@
-package de.htwg.chess.persistence.hibernate.util.transform;
+package de.htwg.chess.persistence.util;
 
 import de.htwg.chess.model.IChessGame;
 import de.htwg.chess.model.impl.ChessGame;
-import de.htwg.chess.persistence.hibernate.PersistenceChessGame;
+import de.htwg.chess.persistence.IPersistenceChessGame;
 
 public class PersistenceObjectToChessGameUtil {
 
-	public static IChessGame transform(PersistenceChessGame persistenceChessGame) {
+	public static IChessGame transform(IPersistenceChessGame persistenceChessGame) {
 		
 		IChessGame chessGame = new ChessGame();
 		chessGame.setId(persistenceChessGame.getId());

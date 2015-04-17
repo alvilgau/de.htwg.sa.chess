@@ -10,9 +10,10 @@ import org.hibernate.criterion.Restrictions;
 
 import de.htwg.chess.model.IChessGame;
 import de.htwg.chess.persistence.IChessDao;
+import de.htwg.chess.persistence.IPersistenceChessGame;
 import de.htwg.chess.persistence.hibernate.util.HibernateUtil;
-import de.htwg.chess.persistence.hibernate.util.transform.ChessGameToPersistenceObjectUtil;
-import de.htwg.chess.persistence.hibernate.util.transform.PersistenceObjectToChessGameUtil;
+import de.htwg.chess.persistence.util.ChessGameToPersistenceObjectUtil;
+import de.htwg.chess.persistence.util.PersistenceObjectToChessGameUtil;
 
 public class ChessHibernateDao implements IChessDao {
 
@@ -25,7 +26,7 @@ public class ChessHibernateDao implements IChessDao {
 	@Override
 	public void saveGame(IChessGame chessGame) {
 		this.session.beginTransaction();
-		PersistenceChessGame persistenceChessGame = ChessGameToPersistenceObjectUtil
+		IPersistenceChessGame persistenceChessGame = ChessGameToPersistenceObjectUtil
 				.transform(chessGame);
 		this.session.save(persistenceChessGame);
 		this.session.getTransaction().commit();
@@ -37,7 +38,7 @@ public class ChessHibernateDao implements IChessDao {
 		this.session.beginTransaction();
 		Query query = this.session.createQuery("FROM PersistenceChessGame WHERE id = :id");
 		query.setParameter("id", id);
-		List<PersistenceChessGame> games = query.list();
+		List<IPersistenceChessGame> games = query.list();
 		this.session.getTransaction().commit();
 
 		if (games.size() > 0) {
@@ -55,16 +56,16 @@ public class ChessHibernateDao implements IChessDao {
 	@SuppressWarnings("unchecked")
 	public boolean deleteGame(String id) {
 		this.session.beginTransaction();
-		Criteria criteria = this.session.createCriteria(PersistenceChessGame.class);
+		Criteria criteria = this.session.createCriteria(IPersistenceChessGame.class);
 		criteria.add(Restrictions.eq("id", id));
-		List<PersistenceChessGame> games = criteria.list();
+		List<IPersistenceChessGame> games = criteria.list();
 		this.session.getTransaction().commit();
 
 		if (games.size() < 1) {
 			return false;
 		}
 
-		PersistenceChessGame game = games.get(0);
+		IPersistenceChessGame game = games.get(0);
 		this.session.beginTransaction();
 		this.session.delete(game);
 		this.session.getTransaction().commit();
@@ -75,12 +76,12 @@ public class ChessHibernateDao implements IChessDao {
 	@SuppressWarnings("unchecked")
 	public List<IChessGame> getAllGames() {
 		this.session.beginTransaction();
-		Criteria criteria = this.session.createCriteria(PersistenceChessGame.class);
-		List<PersistenceChessGame> games = criteria.list();
+		Criteria criteria = this.session.createCriteria(IPersistenceChessGame.class);
+		List<IPersistenceChessGame> games = criteria.list();
 		this.session.getTransaction().commit();
 
 		List<IChessGame> chessGames = new ArrayList<IChessGame>();
-		for (PersistenceChessGame game : games) {
+		for (IPersistenceChessGame game : games) {
 			chessGames.add(PersistenceObjectToChessGameUtil.transform(game));
 		}
 		return chessGames;

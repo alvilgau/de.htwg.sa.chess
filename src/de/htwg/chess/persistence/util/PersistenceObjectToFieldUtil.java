@@ -1,4 +1,4 @@
-package de.htwg.chess.persistence.hibernate.util.transform;
+package de.htwg.chess.persistence.util;
 
 import java.util.Collection;
 
@@ -11,21 +11,21 @@ import de.htwg.chess.model.IFigure.Team;
 import de.htwg.chess.model.IFigureFacotry;
 import de.htwg.chess.model.impl.FieldFactory;
 import de.htwg.chess.model.impl.FigureFactory;
-import de.htwg.chess.persistence.hibernate.PersistenceField;
+import de.htwg.chess.persistence.IPersistenceField;
 
 public class PersistenceObjectToFieldUtil {
 
-	public static IField[][] transform(Collection<PersistenceField> persistenceFields) {
+	public static IField[][] transform(Collection<IPersistenceField> persistenceFields) {
 
 		IField[][] fields = new IField[ChessController.FIELD_SIZE][ChessController.FIELD_SIZE];
 
-		for (PersistenceField persistenceField : persistenceFields) {
+		for (IPersistenceField persistenceField : persistenceFields) {
 			fields[persistenceField.getxPos()][persistenceField.getyPos()] = transform(persistenceField);
 		}
 		return fields;
 	}
 
-	private static IField transform(PersistenceField persistenceField) {
+	private static IField transform(IPersistenceField persistenceField) {
 
 		IFigureFacotry figureFactory = new FigureFactory();
 		IFieldFactory fieldFactory = new FieldFactory();
