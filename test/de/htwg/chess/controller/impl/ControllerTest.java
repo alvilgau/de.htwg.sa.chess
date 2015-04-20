@@ -235,8 +235,8 @@ public class ControllerTest {
 	@Test
 	public void testToJson() {
 		this.controller.select(0, 1);
-		String json = "{\"checkmateMessage\":\"\",\"select\":true,";
-		assertTrue(this.controller.toJson().startsWith(json));
+		String json = "\"select\":true,";
+		assertTrue(this.controller.toJson().contains(json));
 	}
 
 	@Test
