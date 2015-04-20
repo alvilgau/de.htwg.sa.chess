@@ -99,8 +99,8 @@ public class ChessFrame extends JFrame implements IObserver {
 		 */
 		if (plugins.size() > 0) {
 			JMenu pluginMenu = new JMenu("Status Plugins");
-			for (final StatusPlugin plugin : plugins) {
-				final JCheckBoxMenuItem checkBox = new JCheckBoxMenuItem(plugin.getName());
+			for (StatusPlugin plugin : plugins) {
+				JCheckBoxMenuItem checkBox = new JCheckBoxMenuItem(plugin.getName());
 				checkBox.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
