@@ -4,31 +4,31 @@ import java.util.Date;
 
 public interface IChessGame {
 
-	public String getId();
+	String getId();
 
-	public void setId(String id);
+	void setId(String id);
 
-	public String getName();
+	String getName();
 
-	public void setName(String name);
+	void setName(String name);
 
-	public Date getSaveDate();
+	Date getSaveDate();
 
-	public void setSaveDate(Date saveDate);
+	void setSaveDate(Date saveDate);
 
-	public int getTurn();
+	int getTurn();
 
-	public void setTurn(int turn);
+	void setTurn(int turn);
 
-	public int getTurnsWhite();
+	int getTurnsWhite();
 
-	public void setTurnsWhite(int turnsWhite);
+	void setTurnsWhite(int turnsWhite);
 
-	public int getTurnsBlack();
+	int getTurnsBlack();
 
-	public void setTurnsBlack(int turnsBlack);
+	void setTurnsBlack(int turnsBlack);
 
-	public IField[][] getFields();
+	IField[][] getFields();
 
-	public void setFields(IField[][] fields);
+	void setFields(IField[][] fields);
 }

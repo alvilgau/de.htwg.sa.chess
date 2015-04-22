@@ -4,32 +4,32 @@ import java.util.Collection;
 import java.util.Date;
 
 public interface IPersistenceChessGame {
-	
-	public String getId();
 
-	public void setId(String id);
+	String getId();
 
-	public String getName();
+	void setId(String id);
 
-	public void setName(String name);
+	String getName();
 
-	public Date getSaveDate();
+	void setName(String name);
 
-	public void setSaveDate(Date saveDate);
+	Date getSaveDate();
 
-	public int getTurn();
+	void setSaveDate(Date saveDate);
 
-	public void setTurn(int turn);
+	int getTurn();
 
-	public int getTurnsWhite();
+	void setTurn(int turn);
 
-	public void setTurnsWhite(int turnsWhite);
+	int getTurnsWhite();
 
-	public int getTurnsBlack();
+	void setTurnsWhite(int turnsWhite);
 
-	public void setTurnsBlack(int turnsBlack);
+	int getTurnsBlack();
 
-	public Collection<IPersistenceField> getFields();
+	void setTurnsBlack(int turnsBlack);
 
-	public void setFields(Collection<IPersistenceField> fields);
+	Collection<IPersistenceField> getFields();
+
+	void setFields(Collection<IPersistenceField> fields);
 }

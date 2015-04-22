@@ -1,33 +1,32 @@
 package de.htwg.chess.persistence;
 
-
 public interface IPersistenceField {
-	
-	public String getId();
 
-	public void setId(String id);
+	String getId();
 
-	public Boolean getSet();
+	void setId(String id);
 
-	public void setSet(Boolean set);
+	Boolean getSet();
 
-	public Integer getxPos();
+	void setSet(Boolean set);
 
-	public void setxPos(Integer xPos);
+	Integer getxPos();
 
-	public Integer getyPos();
+	void setxPos(Integer xPos);
 
-	public void setyPos(Integer yPos);
+	Integer getyPos();
 
-	public Integer getFigure();
+	void setyPos(Integer yPos);
 
-	public void setFigure(Integer figure);
+	Integer getFigure();
 
-	public Integer getTeam();
+	void setFigure(Integer figure);
 
-	public void setTeam(Integer team);
+	Integer getTeam();
 
-	public IPersistenceChessGame getChessgame();
+	void setTeam(Integer team);
 
-	public void setChessgame(IPersistenceChessGame chessgame);
+	IPersistenceChessGame getChessgame();
+
+	void setChessgame(IPersistenceChessGame chessgame);
 }
