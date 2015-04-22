@@ -15,7 +15,7 @@ import de.htwg.chess.persistence.IPersistenceChessGame;
 import de.htwg.chess.persistence.IPersistenceField;
 
 @Entity
-@Table(name = "game")
+@Table(name = "chess_game")
 public class PersistenceChessGame implements IPersistenceChessGame {
 
 	@Id
@@ -35,58 +35,72 @@ public class PersistenceChessGame implements IPersistenceChessGame {
 	@OneToMany(mappedBy = "chessgame", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = PersistenceField.class)
 	private Collection<IPersistenceField> fields;
 
+	@Override
 	public String getId() {
 		return this.id;
 	}
 
+	@Override
 	public void setId(String id) {
 		this.id = id;
 	}
 
+	@Override
 	public String getName() {
 		return this.name;
 	}
 
+	@Override
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	@Override
 	public Date getSaveDate() {
 		return this.saveDate;
 	}
 
+	@Override
 	public void setSaveDate(Date saveDate) {
 		this.saveDate = saveDate;
 	}
 
+	@Override
 	public int getTurn() {
 		return this.turn;
 	}
 
+	@Override
 	public void setTurn(int turn) {
 		this.turn = turn;
 	}
 
+	@Override
 	public int getTurnsWhite() {
 		return this.turnsWhite;
 	}
 
+	@Override
 	public void setTurnsWhite(int turnsWhite) {
 		this.turnsWhite = turnsWhite;
 	}
 
+	@Override
 	public int getTurnsBlack() {
 		return this.turnsBlack;
 	}
 
+	@Override
 	public void setTurnsBlack(int turnsBlack) {
 		this.turnsBlack = turnsBlack;
 	}
 
+	@Override
 	public Collection<IPersistenceField> getFields() {
 		return this.fields;
 	}
 
+	@Override
 	public void setFields(Collection<IPersistenceField> fields) {
 		this.fields = fields;
 	}
