@@ -8,7 +8,7 @@ import de.htwg.chess.persistence.IPersistenceChessGame;
 import de.htwg.chess.persistence.IPersistenceField;
 import de.htwg.chess.persistence.hibernate.PersistenceField;
 
-public class FieldToPersistenceObjectUtil {
+public final class FieldToPersistenceObjectUtil {
 
 	private FieldToPersistenceObjectUtil() {
 	}

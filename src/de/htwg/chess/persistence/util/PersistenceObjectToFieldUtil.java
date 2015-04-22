@@ -13,7 +13,7 @@ import de.htwg.chess.model.impl.FieldFactory;
 import de.htwg.chess.model.impl.FigureFactory;
 import de.htwg.chess.persistence.IPersistenceField;
 
-public class PersistenceObjectToFieldUtil {
+public final class PersistenceObjectToFieldUtil {
 
 	private PersistenceObjectToFieldUtil() {
 	}

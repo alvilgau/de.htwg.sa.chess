@@ -4,7 +4,7 @@ import de.htwg.chess.model.IChessGame;
 import de.htwg.chess.model.impl.ChessGame;
 import de.htwg.chess.persistence.IPersistenceChessGame;
 
-public class PersistenceObjectToChessGameUtil {
+public final class PersistenceObjectToChessGameUtil {
 
 	private PersistenceObjectToChessGameUtil() {
 	}
