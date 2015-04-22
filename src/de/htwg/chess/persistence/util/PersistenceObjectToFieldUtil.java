@@ -15,6 +15,9 @@ import de.htwg.chess.persistence.IPersistenceField;
 
 public class PersistenceObjectToFieldUtil {
 
+	private PersistenceObjectToFieldUtil() {
+	}
+
 	public static IField[][] transform(Collection<IPersistenceField> persistenceFields) {
 
 		IField[][] fields = new IField[ChessController.FIELD_SIZE][ChessController.FIELD_SIZE];

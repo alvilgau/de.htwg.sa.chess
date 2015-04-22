@@ -6,8 +6,11 @@ import de.htwg.chess.persistence.IPersistenceChessGame;
 
 public class PersistenceObjectToChessGameUtil {
 
+	private PersistenceObjectToChessGameUtil() {
+	}
+
 	public static IChessGame transform(IPersistenceChessGame persistenceChessGame) {
-		
+
 		IChessGame chessGame = new ChessGame();
 		chessGame.setId(persistenceChessGame.getId());
 		chessGame.setName(persistenceChessGame.getName());
@@ -15,8 +18,9 @@ public class PersistenceObjectToChessGameUtil {
 		chessGame.setTurn(persistenceChessGame.getTurn());
 		chessGame.setTurnsBlack(persistenceChessGame.getTurnsBlack());
 		chessGame.setTurnsWhite(persistenceChessGame.getTurnsWhite());
-		chessGame.setFields(PersistenceObjectToFieldUtil.transform(persistenceChessGame.getFields()));
-		
+		chessGame
+				.setFields(PersistenceObjectToFieldUtil.transform(persistenceChessGame.getFields()));
+
 		return chessGame;
 	}
 }

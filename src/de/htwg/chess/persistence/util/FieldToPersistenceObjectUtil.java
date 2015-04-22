@@ -10,7 +10,11 @@ import de.htwg.chess.persistence.hibernate.PersistenceField;
 
 public class FieldToPersistenceObjectUtil {
 
-	public static List<IPersistenceField> transform(IField[][] fields, IPersistenceChessGame chessGame) {
+	private FieldToPersistenceObjectUtil() {
+	}
+
+	public static List<IPersistenceField> transform(IField[][] fields,
+			IPersistenceChessGame chessGame) {
 
 		List<IPersistenceField> transformedFields = new ArrayList<>();
 

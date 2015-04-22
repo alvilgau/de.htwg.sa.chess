@@ -6,6 +6,9 @@ import de.htwg.chess.persistence.hibernate.PersistenceChessGame;
 
 public class ChessGameToPersistenceObjectUtil {
 
+	private ChessGameToPersistenceObjectUtil() {
+	}
+
 	public static IPersistenceChessGame transform(IChessGame chessGame) {
 
 		IPersistenceChessGame persistenceChessGame = new PersistenceChessGame();
