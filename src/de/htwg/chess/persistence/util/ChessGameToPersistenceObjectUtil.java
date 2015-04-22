@@ -1,7 +1,8 @@
-package de.htwg.chess.persistence.hibernate;
+package de.htwg.chess.persistence.util;
 
 import de.htwg.chess.model.IChessGame;
 import de.htwg.chess.persistence.IPersistenceChessGame;
+import de.htwg.chess.persistence.hibernate.PersistenceChessGame;
 
 public final class ChessGameToPersistenceObjectUtil {
 

@@ -1,4 +1,4 @@
-package de.htwg.chess.persistence.hibernate;
+package de.htwg.chess.persistence.util;
 
 import de.htwg.chess.model.IChessGame;
 import de.htwg.chess.model.impl.ChessGame;

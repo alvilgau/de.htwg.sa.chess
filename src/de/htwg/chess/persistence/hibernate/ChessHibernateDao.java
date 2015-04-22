@@ -12,6 +12,8 @@ import de.htwg.chess.model.IChessGame;
 import de.htwg.chess.persistence.IChessDao;
 import de.htwg.chess.persistence.IPersistenceChessGame;
 import de.htwg.chess.persistence.hibernate.util.HibernateUtil;
+import de.htwg.chess.persistence.util.ChessGameToPersistenceObjectUtil;
+import de.htwg.chess.persistence.util.PersistenceObjectToChessGameUtil;
 
 public class ChessHibernateDao implements IChessDao {
 
