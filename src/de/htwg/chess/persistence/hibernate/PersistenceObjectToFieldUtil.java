@@ -1,4 +1,4 @@
-package de.htwg.chess.persistence.util;
+package de.htwg.chess.persistence.hibernate;
 
 import java.util.Collection;
 

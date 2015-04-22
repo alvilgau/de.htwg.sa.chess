@@ -1,4 +1,4 @@
-package de.htwg.chess.persistence.util;
+package de.htwg.chess.persistence.hibernate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,6 @@ import java.util.List;
 import de.htwg.chess.model.IField;
 import de.htwg.chess.persistence.IPersistenceChessGame;
 import de.htwg.chess.persistence.IPersistenceField;
-import de.htwg.chess.persistence.hibernate.PersistenceField;
 
 public final class FieldToPersistenceObjectUtil {
 
