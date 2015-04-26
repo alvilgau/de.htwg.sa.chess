@@ -1,6 +1,5 @@
 package de.htwg.chess.persistence;
 
-import java.util.Collection;
 import java.util.Date;
 
 public interface IPersistenceChessGame {
@@ -28,8 +27,4 @@ public interface IPersistenceChessGame {
 	int getTurnsBlack();
 
 	void setTurnsBlack(int turnsBlack);
-
-	Collection<IPersistenceField> getFields();
-
-	void setFields(Collection<IPersistenceField> fields);
 }

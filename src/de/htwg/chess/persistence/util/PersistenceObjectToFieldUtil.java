@@ -17,17 +17,17 @@ public final class PersistenceObjectToFieldUtil {
 
 	private PersistenceObjectToFieldUtil() {
 	}
-
-	public static IField[][] transform(Collection<IPersistenceField> persistenceFields) {
-
+	
+	public static IField[][] transform(Collection<? extends IPersistenceField> persistenceFields) {
+		
 		IField[][] fields = new IField[ChessController.FIELD_SIZE][ChessController.FIELD_SIZE];
-
+		
 		for (IPersistenceField persistenceField : persistenceFields) {
 			fields[persistenceField.getxPos()][persistenceField.getyPos()] = transform(persistenceField);
 		}
 		return fields;
 	}
-
+	
 	private static IField transform(IPersistenceField persistenceField) {
 
 		IFigureFacotry figureFactory = new FigureFactory();
@@ -64,5 +64,4 @@ public final class PersistenceObjectToFieldUtil {
 			return fieldFactory.createEmptyField(x, y);
 		}
 	}
-
 }

@@ -193,5 +193,10 @@ public interface IChessController extends IObservable {
 	 * 
 	 * @return IChessDao
 	 */
-	IChessDao getDao(); 
+	IChessDao getDao();
+
+	/**
+	 * Deletes object identified by id from database.
+	 */
+	void deleteFromDB(String id); 
 }

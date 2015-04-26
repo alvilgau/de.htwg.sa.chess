@@ -40,7 +40,7 @@ public class ChessFrame extends JFrame implements IObserver {
 
 		JMenuBar menuBar;
 		JMenu gameMenu;
-		JMenuItem newMenuItem, saveMenuItem, loadMenuItem, quitMenuItem;
+		JMenuItem newMenuItem, saveMenuItem, loadMenuItem, deleteMenuItem, quitMenuItem;
 
 		/**
 		 * Game Menu
@@ -58,6 +58,7 @@ public class ChessFrame extends JFrame implements IObserver {
 		});
 		gameMenu.add(newMenuItem);
 
+		// add save menu item
 		saveMenuItem = new JMenuItem("Save Game");
 		saveMenuItem.addActionListener(new ActionListener() {
 			@Override
@@ -65,15 +66,15 @@ public class ChessFrame extends JFrame implements IObserver {
 				ChessFrame.this.infoPane.handleSaveGame(ChessFrame.this);
 			}
 		});
-
 		gameMenu.add(saveMenuItem);
 
+		// add load menu item
 		loadMenuItem = new JMenuItem("Load Game");
 		loadMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String idOfSelectedGame = ChessFrame.this.infoPane.handleLoadGame(ChessFrame.this,
-						controller.getDao().getAllGames());
+						controller.getDao().getAllGames(), "Load");
 				if (idOfSelectedGame != null) {
 					controller.loadFromDB(idOfSelectedGame);
 				}
@@ -81,6 +82,21 @@ public class ChessFrame extends JFrame implements IObserver {
 
 		});
 		gameMenu.add(loadMenuItem);
+		
+		// add delete menu item
+		deleteMenuItem = new JMenuItem("Delete Game");
+		deleteMenuItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String idOfSelectedGame = ChessFrame.this.infoPane.handleLoadGame(ChessFrame.this,
+						controller.getDao().getAllGames(), "Delete");
+				if (idOfSelectedGame != null) {
+					controller.deleteFromDB(idOfSelectedGame);
+				}
+			}
+			
+		});
+		gameMenu.add(deleteMenuItem);
 
 		quitMenuItem = new JMenuItem("Quit");
 		quitMenuItem.addActionListener(new ActionListener() {

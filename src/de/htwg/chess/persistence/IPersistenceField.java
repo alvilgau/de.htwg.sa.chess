@@ -25,8 +25,4 @@ public interface IPersistenceField {
 	Integer getTeam();
 
 	void setTeam(Integer team);
-
-	IPersistenceChessGame getChessgame();
-
-	void setChessgame(IPersistenceChessGame chessgame);
 }

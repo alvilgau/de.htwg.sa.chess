@@ -2,14 +2,8 @@ package de.htwg.chess.persistence.couchdb;
 
 import org.ektorp.support.CouchDbDocument;
 
-import de.htwg.chess.persistence.IPersistenceChessGame;
-import de.htwg.chess.persistence.IPersistenceField;
-
-public class PersistenceField extends CouchDbDocument implements IPersistenceField {
-
-	/**
-	 * 
-	 */
+public class PersistenceField extends CouchDbDocument implements IPersistenceCouchDbField {
+	
 	private static final long serialVersionUID = 8020935469601114063L;
 
 	private String id;
@@ -23,8 +17,6 @@ public class PersistenceField extends CouchDbDocument implements IPersistenceFie
 	private Integer figure;
 
 	private Integer team;
-
-	private IPersistenceChessGame chessgame;
 
 	public String getId() {
 		return id;
@@ -72,13 +64,5 @@ public class PersistenceField extends CouchDbDocument implements IPersistenceFie
 
 	public void setTeam(Integer team) {
 		this.team = team;
-	}
-
-	public IPersistenceChessGame getChessgame() {
-		return chessgame;
-	}
-
-	public void setChessgame(IPersistenceChessGame chessgame) {
-		this.chessgame = chessgame;
 	}
 }

@@ -5,14 +5,10 @@ import java.util.Date;
 
 import org.ektorp.support.CouchDbDocument;
 
-import de.htwg.chess.persistence.IPersistenceChessGame;
-import de.htwg.chess.persistence.IPersistenceField;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-public class PersistenceChessGame extends CouchDbDocument implements IPersistenceChessGame {
+public class PersistenceChessGame extends CouchDbDocument implements IPersistenceCouchDbChessGame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2521164001857616783L;
 
 	private String id;
@@ -27,7 +23,8 @@ public class PersistenceChessGame extends CouchDbDocument implements IPersistenc
 
 	private int turnsBlack;
 
-	private Collection<IPersistenceField> fields;
+	@JsonDeserialize(as=Collection.class, contentAs=PersistenceField.class)
+	private Collection<IPersistenceCouchDbField> fields;
 
 	public String getId() {
 		return id;
@@ -77,11 +74,11 @@ public class PersistenceChessGame extends CouchDbDocument implements IPersistenc
 		this.turnsBlack = turnsBlack;
 	}
 
-	public Collection<IPersistenceField> getFields() {
-		return fields;
+	public Collection<IPersistenceCouchDbField> getFields() {
+		return this.fields;
 	}
 
-	public void setFields(Collection<IPersistenceField> fields) {
+	public void setFields(Collection<IPersistenceCouchDbField> fields) {
 		this.fields = fields;
 	}
 }

@@ -8,11 +8,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import de.htwg.chess.persistence.IPersistenceChessGame;
-import de.htwg.chess.persistence.IPersistenceField;
 
 @Entity
 @Table(name = "chess_field")
-public class PersistenceField implements IPersistenceField {
+public class PersistenceField implements IPersistenceHibernateField {
 
 	@Id
 	@Column(name = "id")

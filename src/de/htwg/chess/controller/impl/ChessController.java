@@ -607,4 +607,10 @@ public class ChessController extends Observable implements IChessController {
 		updateCheckmate();
 		notifyObservers();
 	}
+	
+	@Override
+	public void deleteFromDB(String id) {
+		IChessGame chessGame = this.dao.getGame(id);
+		this.dao.deleteGame(chessGame.getId());
+	}
 }

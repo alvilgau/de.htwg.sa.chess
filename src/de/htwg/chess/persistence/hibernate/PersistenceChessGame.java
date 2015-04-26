@@ -11,12 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import de.htwg.chess.persistence.IPersistenceChessGame;
-import de.htwg.chess.persistence.IPersistenceField;
-
 @Entity
 @Table(name = "chess_game")
-public class PersistenceChessGame implements IPersistenceChessGame {
+public class PersistenceChessGame implements IPersistenceHibernateChessGame {
 
 	@Id
 	@Column(name = "id")
@@ -33,7 +30,7 @@ public class PersistenceChessGame implements IPersistenceChessGame {
 	private int turnsBlack;
 
 	@OneToMany(mappedBy = "chessgame", fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = PersistenceField.class)
-	private Collection<IPersistenceField> fields;
+	private Collection<IPersistenceHibernateField> fields;
 
 	@Override
 	public String getId() {
@@ -96,13 +93,12 @@ public class PersistenceChessGame implements IPersistenceChessGame {
 	}
 
 	@Override
-	public Collection<IPersistenceField> getFields() {
+	public Collection<IPersistenceHibernateField> getFields() {
 		return this.fields;
 	}
 
 	@Override
-	public void setFields(Collection<IPersistenceField> fields) {
+	public void setFields(Collection<IPersistenceHibernateField> fields) {
 		this.fields = fields;
 	}
-
 }

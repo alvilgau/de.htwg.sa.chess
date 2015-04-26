@@ -80,7 +80,7 @@ public class InfoPane extends JOptionPane {
 	/**
 	 * Loads game from database.
 	 */
-	public String handleLoadGame(JFrame frame, List<IChessGame> chessGames) {
+	public String handleLoadGame(JFrame frame, List<IChessGame> chessGames, String desc) {
 
 		// check if any games are available
 		if (chessGames.isEmpty()) {
@@ -98,7 +98,7 @@ public class InfoPane extends JOptionPane {
 
 		// display available games in database games.
 		Object selection = JOptionPane.showInputDialog(frame,
-				"Pick a game to load", "Load game",
+				"Pick a game to " + desc.toLowerCase(), desc + " game",
 				JOptionPane.QUESTION_MESSAGE, null, nameList, null);
 
 		// there was a selection of the user. so check for the selection
