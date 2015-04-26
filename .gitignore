@@ -5,6 +5,7 @@
 
 *.class
 chess.log*
+chess.data
  
 # Package Files #
 
