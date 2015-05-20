@@ -584,6 +584,11 @@ public class ChessController extends Observable implements IChessController {
 	@Override
 	public void loadFromDB(String id) {
 		IChessGame chessGame = this.dao.getGame(id);
+		if(chessGame == null) {
+			this.statusMessage = "Failed to load game with id " + id + ".";
+			notifyObservers();
+			return;
+		}
 
 		this.fields = chessGame.getFields();
 		this.possibleMoves.clear();
@@ -611,6 +616,13 @@ public class ChessController extends Observable implements IChessController {
 	@Override
 	public void deleteFromDB(String id) {
 		IChessGame chessGame = this.dao.getGame(id);
-		this.dao.deleteGame(chessGame.getId());
+
+		if(chessGame == null || (chessGame != null && !this.dao.deleteGame(chessGame.getId()))) {
+			this.statusMessage = "Failed to delete game with id " + id + ".";
+		}
+		else {
+			this.statusMessage = "Successfully deleted game.";
+		}
+		notifyObservers();
 	}
 }
