@@ -122,9 +122,19 @@ public final class MoveValidator {
 	 */
 	public List<IField> diagonalMoveValidation(IFigure fig, IField[][] fields) {
 		List<IField> possibleMoves = new ArrayList<IField>();
+		
+		possibleMoves = checkMovingLeftUp(fig, fields, possibleMoves);
+		possibleMoves = checkMovingLeftDown(fig, fields, possibleMoves);
+		possibleMoves = checkMovingRightUp(fig, fields, possibleMoves);
+		possibleMoves = checkMovingRightDown(fig, fields, possibleMoves);
+
+		return possibleMoves;
+	}
+
+	private List<IField> checkMovingLeftUp(IFigure fig, IField[][] fields,
+			List<IField> possibleMoves) {
 		int x = fig.getxPos() - 1;
 		int y = fig.getyPos() + 1;
-
 		// moving left-up
 		while (x >= Figure.POS_MIN && y <= Figure.POS_MAX) {
 			if (checkCollision(fig, fields[x][y], possibleMoves)) {
@@ -133,10 +143,14 @@ public final class MoveValidator {
 			x--;
 			y++;
 		}
+		return possibleMoves;
+	}
 
+	private List<IField> checkMovingLeftDown(IFigure fig, IField[][] fields,
+			List<IField> possibleMoves) {
 		// moving left-down
-		x = fig.getxPos() - 1;
-		y = fig.getyPos() - 1;
+		int x = fig.getxPos() - 1;
+		int y = fig.getyPos() - 1;
 		while (x >= Figure.POS_MIN && y >= Figure.POS_MIN) {
 			if (checkCollision(fig, fields[x][y], possibleMoves)) {
 				break;
@@ -144,10 +158,14 @@ public final class MoveValidator {
 			x--;
 			y--;
 		}
+		return possibleMoves;
+	}
 
+	private List<IField> checkMovingRightUp(IFigure fig, IField[][] fields,
+			List<IField> possibleMoves) {
 		// moving right-up
-		x = fig.getxPos() + 1;
-		y = fig.getyPos() + 1;
+		int x = fig.getxPos() + 1;
+		int y = fig.getyPos() + 1;
 		while (x <= Figure.POS_MAX && y <= Figure.POS_MAX) {
 			if (checkCollision(fig, fields[x][y], possibleMoves)) {
 				break;
@@ -155,10 +173,14 @@ public final class MoveValidator {
 			x++;
 			y++;
 		}
+		return possibleMoves;
+	}
 
+	private List<IField> checkMovingRightDown(IFigure fig, IField[][] fields,
+			List<IField> possibleMoves) {
 		// moving right-down
-		x = fig.getxPos() + 1;
-		y = fig.getyPos() - 1;
+		int x = fig.getxPos() + 1;
+		int y = fig.getyPos() - 1;
 		while (x <= Figure.POS_MAX && y >= Figure.POS_MIN) {
 			if (checkCollision(fig, fields[x][y], possibleMoves)) {
 				break;
@@ -166,7 +188,6 @@ public final class MoveValidator {
 			x++;
 			y--;
 		}
-
 		return possibleMoves;
 	}
 }

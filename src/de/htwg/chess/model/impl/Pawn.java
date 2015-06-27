@@ -7,6 +7,9 @@ import de.htwg.chess.model.FigureType;
 import de.htwg.chess.model.IField;
 
 public class Pawn extends Figure {
+	
+	private static final int MOVE_FORWARD_BY_ONE = 1;
+	private static final int MOVE_FORWARD_BY_TWO = 2;
 
 	private int startPosY;
 
@@ -33,7 +36,7 @@ public class Pawn extends Figure {
 	@Override
 	public List<IField> getPossibleMoves(IField[][] fields) {
 		List<IField> possibleMoves = new ArrayList<IField>();
-		int dY = getTeamNumber() == Team.white.ordinal() ? 1 : -1;
+		int dY = getTeamNumber() == Team.white.ordinal() ? MOVE_FORWARD_BY_ONE : -MOVE_FORWARD_BY_ONE;
 
 		/* Move 1 field forward */
 		IField field = getNeighbour(0, dY, fields);
@@ -42,7 +45,7 @@ public class Pawn extends Figure {
 
 			/* Move 2 fields forward */
 			if (getyPos() == this.startPosY) {
-				int dY2 = getTeamNumber() == Team.white.ordinal() ? 2 : -2;
+				int dY2 = getTeamNumber() == Team.white.ordinal() ? MOVE_FORWARD_BY_TWO : -MOVE_FORWARD_BY_TWO;
 				field = getNeighbour(0, dY2, fields);
 				if (field != null && !field.isSet()) {
 					possibleMoves.add(field);

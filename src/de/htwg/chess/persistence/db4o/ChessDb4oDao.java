@@ -14,12 +14,11 @@ import de.htwg.chess.persistence.IChessDao;
 public class ChessDb4oDao implements IChessDao {
 
 	private ObjectContainer db;
-	private String helper;
 
 	public ChessDb4oDao() {
 		File currentDirFile = new File("");
-		this.helper = currentDirFile.getAbsolutePath() + "\\chess.data";
-		this.db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), this.helper);
+		String fullPath = currentDirFile.getAbsolutePath() + "\\chess.data";
+		this.db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), fullPath);
 	}
 
 	@Override

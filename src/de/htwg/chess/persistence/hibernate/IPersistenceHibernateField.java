@@ -5,7 +5,7 @@ import de.htwg.chess.persistence.IPersistenceField;
 
 public interface IPersistenceHibernateField extends IPersistenceField {
 
-	public IPersistenceChessGame getChessgame();
+	IPersistenceChessGame getChessgame();
 	
-	public void setChessgame(IPersistenceChessGame chessGame);
+	void setChessgame(IPersistenceChessGame chessGame);
 }

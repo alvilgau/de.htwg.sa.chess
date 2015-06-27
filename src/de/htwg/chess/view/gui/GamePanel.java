@@ -22,8 +22,10 @@ public class GamePanel extends JPanel {
 	private static final Color LIGHT = Color.decode("#E5CEA4");
 	private static final Color DARK = Color.decode("#A4785B");
 	private static final Color LIGHT_BLUE = Color.decode("#B8CFE5");
-
-	private JButton[][] chessField = new JButton[8][8];
+	private static final int X_BUTTON_ELEMENTS = 8;
+	private static final int Y_BUTTON_ELEMENTS = 8;
+	
+	private JButton[][] chessField = new JButton[X_BUTTON_ELEMENTS][Y_BUTTON_ELEMENTS];
 	private IChessController controller;
 
 	/**
