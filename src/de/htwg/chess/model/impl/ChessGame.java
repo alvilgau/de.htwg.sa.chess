@@ -80,6 +80,5 @@ public class ChessGame implements IChessGame {
 
 	public void setFields(IField[][] fields) {
 		this.fields = (fields != null) ? fields : new IField[8][8];
-		this.fields = fields;
 	}
 }
