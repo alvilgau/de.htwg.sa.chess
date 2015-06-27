@@ -29,8 +29,6 @@ public class ChessDb4oDao implements IChessDao {
 
 	@Override
 	public IChessGame getGame(String id) {
-		this.db.close();
-		this.db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), this.helper);
 		Query query = this.db.query();
 		query.constrain(ChessGame.class);
 		query.descend("id").constrain(id);
