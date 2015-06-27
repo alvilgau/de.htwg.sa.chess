@@ -97,12 +97,23 @@
 			<artifactId>org.ektorp</artifactId>
 			<version>1.4.2</version>
 		</dependency>
+		<dependency>
+			<groupId>de.htwg.sa.chess.plugins</groupId>
+			<artifactId>chess-status-plugins</artifactId>
+			<version>0.0.3-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<repositories>
 		<repository>
 			<id>sonatype-forge</id>
 			<url>https://repository.sonatype.org/content/groups/forge/</url>
+		</repository>
+		<repository>
+			<snapshots />
+			<id>snapshots</id>
+			<name>libs-snapshot</name>
+			<url>http://lenny2.in.htwg-konstanz.de:8081/artifactory/libs-snapshot</url>
 		</repository>
 	</repositories>
 
