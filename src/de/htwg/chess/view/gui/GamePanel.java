@@ -24,6 +24,9 @@ public class GamePanel extends JPanel {
 	private static final Color LIGHT_BLUE = Color.decode("#B8CFE5");
 	private static final int X_BUTTON_ELEMENTS = 8;
 	private static final int Y_BUTTON_ELEMENTS = 8;
+	private static final int GRID_LAYOUT_ROWS = 0;
+	private static final int GRID_LAYOUT_COLS = 9;
+	
 	
 	private JButton[][] chessField = new JButton[X_BUTTON_ELEMENTS][Y_BUTTON_ELEMENTS];
 	private IChessController controller;
@@ -36,7 +39,7 @@ public class GamePanel extends JPanel {
 	 */
 	public GamePanel(final IChessController controller) {
 		this.controller = controller;
-		setLayout(new GridLayout(0, 9));
+		setLayout(new GridLayout(GRID_LAYOUT_ROWS, GRID_LAYOUT_COLS));
 
 		// create the single fields
 		for (int column = 0; column < this.chessField.length; column++) {

@@ -7,6 +7,8 @@ import de.htwg.chess.model.IChessGame;
 import de.htwg.chess.model.IField;
 
 public class ChessGame implements IChessGame {
+	
+	private static final int FIELDS_SIZE = 8;
 
 	private String id;
 
@@ -79,6 +81,6 @@ public class ChessGame implements IChessGame {
 	}
 
 	public void setFields(IField[][] fields) {
-		this.fields = (fields != null) ? fields : new IField[8][8];
+		this.fields = (fields != null) ? fields : new IField[FIELDS_SIZE][FIELDS_SIZE];
 	}
 }
