@@ -1,5 +1,6 @@
 package de.htwg.chess.persistence.db4o;
 
+import java.io.File;
 import java.util.List;
 
 import com.db4o.Db4oEmbedded;
@@ -13,9 +14,12 @@ import de.htwg.chess.persistence.IChessDao;
 public class ChessDb4oDao implements IChessDao {
 
 	private ObjectContainer db;
+	private String helper;
 
 	public ChessDb4oDao() {
-		this.db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "chess.data");
+		File currentDirFile = new File("");
+		this.helper = currentDirFile.getAbsolutePath() + "\\chess.data";
+		this.db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), this.helper);
 	}
 
 	@Override
@@ -26,7 +30,7 @@ public class ChessDb4oDao implements IChessDao {
 	@Override
 	public IChessGame getGame(String id) {
 		this.db.close();
-		this.db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), "chess.data");
+		this.db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), this.helper);
 		Query query = this.db.query();
 		query.constrain(ChessGame.class);
 		query.descend("id").constrain(id);
